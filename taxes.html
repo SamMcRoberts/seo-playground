@@ -12,7 +12,7 @@
 <section class="page-intro shell">
 <p class="kicker">The tax bill you do not see on one form</p>
 <h1 class="display">Your paycheck is not the whole <em>tax base.</em></h1>
-<p class="lead">Direct taxes are only part of the bill. This combines taxes on income, payroll, property, consumption, business incidence, and tariffs without double counting.</p>
+<p class="lead">Direct taxes are only part of the bill. This combines federal taxes, hidden business/payroll incidence, nearly all state and local taxes, tariffs, and optional mandatory government fees without double counting.</p>
 </section>
 
 <section class="section shell" style="padding-top:18px">
@@ -24,10 +24,12 @@
 <div class="light-field"><label for="taxZip">ZIP code</label><div class="tax-local-row"><input id="taxZip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="83709"><button class="btn primary" id="taxZipBtn" type="button">Localize</button></div></div>
 <div class="light-field"><label for="stateLocalRate">State + local rate <button class="note-trigger" type="button" aria-label="State and local tax note" data-note="Enter a rate manually or use ZIP. ZIP selects the ITEP state profile and your income group. ITEP includes state and local taxes broadly, but local incidence is a statewide average rather than an exact municipal/property-tax bill.">i</button></label><input id="stateLocalRate" type="number" min="0" max="30" step=".1" value="10.3"></div>
 <div class="light-field"><label for="tariffCost">Annual tariff burden</label><input id="tariffCost" data-money type="text" inputmode="decimal" value="1100"></div>
+<div class="light-field"><label for="govFees">Other mandatory government fees <button class="note-trigger" type="button" aria-label="Government fees note" data-note="Optional annual total for non-tax government charges that ITEP excludes: tolls/road charges, inspections, state-ID or passport fees, permits, public-service charges, and similar mandatory fees. Do not add vehicle registration or driver's-license charges when using the ITEP ZIP model; those are already included.">i</button></label><input id="govFees" data-money type="text" inputmode="decimal" value="0"></div>
 </div>
 <details class="light-advanced"><summary>Household details</summary><div class="field-grid">
 <div class="light-field"><label for="taxKids">Qualifying children under 17</label><input id="taxKids" type="number" min="0" max="10" step="1" value="2"></div>
 <div class="light-field"><label for="taxEarners">Wage earners</label><input id="taxEarners" type="number" min="1" max="8" step="1" value="2"></div>
+<div class="light-field"><label for="federalExciseRate">Federal excise burden (% of income) <button class="note-trigger" type="button" aria-label="Federal excise note" data-note="Default 0.6% uses CBO's middle-quintile incidence benchmark. It captures federal fuel, aviation, alcohol, tobacco, communications and other excise taxes as a bundle. Edit if your household's taxed consumption differs materially.">i</button></label><input id="federalExciseRate" type="number" min="0" max="10" step=".1" value=".6"></div>
 </div></details>
 <div class="live-status" id="stateLocalStatus">National ITEP profile · Fourth 20% · 10.3%</div>
 </div>
@@ -48,7 +50,7 @@
 <div class="compact-section-head"><div><p class="kicker">One ledger</p><h2 class="section-title">Where the burden lands.</h2></div><button class="note-trigger" type="button" aria-label="Chart note" data-note="The stacked bar is proportional to modeled tax dollars, not to 100% of income.">i</button></div>
 <div class="card card-pad">
 <div class="tax-stack" id="taxStack" aria-label="Tax burden composition"></div>
-<div class="chip-grid" style="margin-bottom:20px"><span class="chip">Federal income</span><span class="chip">Employee payroll</span><span class="chip">Employer payroll</span><span class="chip">Federal unemployment</span><span class="chip">Federal corporate incidence</span><span class="chip">Federal excise</span><span class="chip">State & local</span><span class="chip">Tariffs</span></div>
+<div class="chip-grid" style="margin-bottom:20px"><span class="chip">Federal income</span><span class="chip">Employee payroll</span><span class="chip">Employer payroll</span><span class="chip">Federal unemployment</span><span class="chip">Federal corporate incidence</span><span class="chip">Federal excise</span><span class="chip">State & local</span><span class="chip">Tariffs</span><span class="chip">Gov't fees</span></div>
 <div class="grid-3" id="taxCards"></div>
 </div>
 </section>
@@ -65,11 +67,22 @@
 </section>
 
 <section class="section shell">
-<div class="compact-section-head"><div><p class="kicker">State & local</p><h2 class="section-title" id="stateLocalTitle">National ITEP profile.</h2></div><button class="note-trigger" type="button" aria-label="ITEP model note" data-note="ITEP models nearly all state and local tax revenue by income group. ZIP localization selects a state profile; it does not pretend a ZIP alone determines an exact property, sales, or municipal income-tax bill.">i</button></div>
-<div class="grid-3">
+<div class="compact-section-head"><div><p class="kicker">State & local</p><h2 class="section-title" id="stateLocalTitle">National ITEP profile.</h2></div><button class="note-trigger" type="button" aria-label="ITEP model note" data-note="ITEP captures 99.7% of state/local tax revenue nationally. ZIP localization selects the state profile and your income group. Local property, sales, and municipal details remain modeled averages rather than an exact tax return.">i</button></div>
+<div class="grid-4 tax-anatomy-grid">
 <article class="info-card compact"><span class="big" id="slSales">3.9%</span><h3>Sales & excise</h3></article>
 <article class="info-card compact"><span class="big" id="slProperty">3.2%</span><h3>Property</h3></article>
 <article class="info-card compact"><span class="big" id="slIncome">3.1%</span><h3>Income</h3></article>
+<article class="info-card compact"><span class="big" id="slOther">0.1%</span><h3>Other taxes</h3></article>
+</div>
+<div class="coverage-card">
+  <div class="compact-head"><h3>Already inside the ZIP/state total</h3><button class="note-trigger" type="button" aria-label="State and local tax coverage note" data-note="These are not extra add-ons. They are examples of levies already represented in ITEP's all-in state/local rate, so adding them again would double count.">i</button></div>
+  <div class="coverage-grid">
+    <span>General sales tax</span><span>Motor-fuel tax</span><span>Utility taxes</span><span>Insurance-premium taxes</span>
+    <span>Restaurant & lodging taxes</span><span>Vehicle purchase/rental taxes</span><span>Alcohol / tobacco / vape taxes</span><span>Home property tax</span>
+    <span>Renter property-tax pass-through</span><span>Vehicle property tax</span><span>Vehicle registration charges</span><span>Real-estate transfer tax</span>
+    <span>Personal income tax</span><span>Corporate / franchise tax</span><span>Business property & sales taxes</span><span>Severance taxes</span>
+    <span>Driver's-license tax/charge</span><span>Marriage / amusement / occupation licenses</span>
+  </div>
 </div>
 </section>
 
@@ -77,8 +90,8 @@
 <div class="compact-section-head"><div><p class="kicker">Method & limits</p><h2 class="section-title">Incidence-aware, not fake precision.</h2></div><button class="note-trigger" type="button" aria-label="Method note" data-note="There is no single receipt for taxes passed through wages and prices. The model combines statutory taxes with published incidence estimates and keeps assumptions visible.">i</button></div>
 <div class="grid-3">
 <article class="info-card"><h3>2026 federal income tax</h3><p>Married-filing-jointly 2026 brackets, $32,200 standard deduction, and modeled $2,200 Child Tax Credit per qualifying child, subject to the usual eligibility rules.</p></article>
-<article class="info-card"><h3>Federal hidden taxes</h3><p>Employer payroll is calculated under 2026 Social Security/Medicare law. Federal excise uses CBO’s 0.6% middle-quintile effective rate. Federal corporate incidence uses a conservative 0.8% fourth-quintile CBO/CRS benchmark.</p></article>
-<article class="info-card"><h3>No double counting</h3><p>The state/local 10.3% already includes state corporate taxes, business sales/excise, and other state/local taxes. Those are not added again. Tariffs are separate federal customs duties.</p></article>
+<article class="info-card"><h3>Federal hidden taxes</h3><p>Employer payroll is calculated under 2026 Social Security/Medicare law. Federal excise defaults to CBO’s 0.6% middle-quintile incidence benchmark and covers the household burden from federal fuel, aviation, alcohol, tobacco and other excise taxes as a bundle. Federal corporate incidence uses a conservative 0.8% benchmark.</p></article>
+<article class="info-card"><h3>No double counting</h3><p>The ITEP state/local total already includes fuel tax, home/renter/car property tax, vehicle registration, driver's-license charges, selective excise taxes, business taxes, and many small licenses. The separate government-fees input is only for non-tax charges outside that model. Tariffs remain separate federal customs duties.</p></article>
 </div>
 
 </section>
@@ -88,7 +101,9 @@
 <a class="source-link" href="https://www.ssa.gov/cola/factsheets/2026.html" target="_blank" rel="noreferrer"><strong>SSA</strong><span>2026 employee/employer payroll rates and $184,500 Social Security taxable maximum.</span></a>
 <a class="source-link" href="https://www.irs.gov/publications/p15" target="_blank" rel="noreferrer"><strong>IRS Publication 15</strong><span>2026 FUTA: 6.0% on the first $7,000 per employee, generally 0.6% after the maximum 5.4% state unemployment credit.</span></a>
 <a class="source-link" href="https://www.cbo.gov/publication/62300" target="_blank" rel="noreferrer"><strong>CBO</strong><span>Federal tax-incidence framework: individual income, payroll, corporate income, and excise taxes.</span></a>
-<a class="source-link" href="https://www.cbo.gov/publication/62631" target="_blank" rel="noreferrer"><strong>CBO</strong><span>2022 middle-quintile federal excise effective rate: 0.6%.</span></a>
+<a class="source-link" href="https://www.cbo.gov/publication/62631" target="_blank" rel="noreferrer"><strong>CBO</strong><span>Middle-quintile federal excise incidence benchmark: 0.6%.</span></a>
+<a class="source-link" href="https://www.cbo.gov/publication/61945" target="_blank" rel="noreferrer"><strong>CBO · Federal Excise Taxes</strong><span>2026 review of federal excise revenues; most revenue comes from highway/fuel, tobacco, alcohol, aviation, and stock-repurchase taxes.</span></a>
+<a class="source-link" href="https://www.irs.gov/instructions/i720" target="_blank" rel="noreferrer"><strong>IRS Form 720</strong><span>Current federal excise-tax categories and 2026 rates, including fuel and air transportation taxes.</span></a>
 <a class="source-link" href="https://itep.org/whopays-7th-edition/" target="_blank" rel="noreferrer"><strong>ITEP</strong><span>Who Pays? 7th Edition: state-by-state state/local tax incidence by income group, plus the U.S. average benchmark.</span></a>
 <a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs" target="_blank" rel="noreferrer"><strong>Budget Lab</strong><span>August 24, 2026 current-law tariff estimate: about $1,100 per household annually.</span></a>
 </div></div></section>
@@ -141,6 +156,7 @@ function applyProfile(profile,label){
   q("slSales").textContent=(profile.sales?.[i]??0).toFixed(1)+"%";
   q("slProperty").textContent=(profile.property?.[i]??0).toFixed(1)+"%";
   q("slIncome").textContent=(profile.income?.[i]??0).toFixed(1)+"%";
+  q("slOther").textContent=(profile.other?.[i]??0).toFixed(1)+"%";
   renderTaxes();
 }
 function syncLocalizedRate(){
@@ -154,10 +170,11 @@ function syncLocalizedRate(){
   q("slSales").textContent=(localITEP.sales?.[i]??0).toFixed(1)+"%";
   q("slProperty").textContent=(localITEP.property?.[i]??0).toFixed(1)+"%";
   q("slIncome").textContent=(localITEP.income?.[i]??0).toFixed(1)+"%";
+  q("slOther").textContent=(localITEP.other?.[i]??0).toFixed(1)+"%";
 }
 
 function renderTaxes(){
-  const income=Math.max(0,WF.value(q("taxIncome"))),kids=Math.max(0,+q("taxKids").value||0),earners=Math.max(1,+q("taxEarners").value||1),sl=Math.max(0,+q("stateLocalRate").value||0)/100,tariffs=Math.max(0,WF.value(q("tariffCost")));
+  const income=Math.max(0,WF.value(q("taxIncome"))),kids=Math.max(0,+q("taxKids").value||0),earners=Math.max(1,+q("taxEarners").value||1),sl=Math.max(0,+q("stateLocalRate").value||0)/100,tariffs=Math.max(0,WF.value(q("tariffCost"))),govFees=Math.max(0,WF.value(q("govFees"))),federalExciseRate=Math.max(0,+q("federalExciseRate").value||0)/100;
   const employeeFica=payroll(income,earners,true),employerFica=payroll(income,earners,false),futaTax=futa(earners);
   const parts=[
     {name:"Federal income",v:federalIncomeTax(income,kids),note:"2026 MFJ brackets, standard deduction and modeled CTC",cls:"federal"},
@@ -165,9 +182,10 @@ function renderTaxes(){
     {name:"Employer payroll",v:employerFica,note:"Economic incidence treated as lower worker compensation",cls:"hidden"},
     {name:"Federal unemployment",v:futaTax,note:"Net FUTA, assuming full state credit",cls:"hidden"},
     {name:"Federal corporate incidence",v:income*.008,note:"0.8% fourth-quintile incidence benchmark",cls:"hidden"},
-    {name:"Federal excise",v:income*.006,note:"0.6% middle-quintile CBO benchmark",cls:"hidden"},
-    {name:"State & local",v:income*sl,note:(sl*100).toFixed(1)+"% ITEP-style all-in incidence",cls:"state"},
-    {name:"Tariffs / customs",v:tariffs,note:"Current-law consumer burden estimate",cls:"tariff"}
+    {name:"Federal excise",v:income*federalExciseRate,note:(federalExciseRate*100).toFixed(1)+"% CBO-style incidence benchmark covering fuel, aviation, alcohol, tobacco and other federal excise taxes",cls:"excise"},
+    {name:"State & local",v:income*sl,note:(sl*100).toFixed(1)+"% ITEP-style all-in incidence, including fuel/property/vehicle-registration/license taxes",cls:"state"},
+    {name:"Tariffs / customs",v:tariffs,note:"Current-law consumer burden estimate",cls:"tariff"},
+    {name:"Other government fees",v:govFees,note:"User-entered non-tax mandatory charges outside ITEP; default $0 to avoid inventing a household fee burden",cls:"fees"}
   ];
   const total=parts.reduce((a,b)=>a+b.v,0),comp=income+employerFica+futaTax,rate=income?total/income*100:0,compRate=comp?total/comp*100:0;
   q("totalTaxRate").textContent=rate.toFixed(1)+"%";q("totalTaxDollars").textContent=WF.money(total)+" per year";q("compRate").textContent=compRate.toFixed(1)+"%";q("monthlyTax").textContent=WF.money(total/12);
@@ -176,16 +194,17 @@ function renderTaxes(){
   WF.initNotes();
 }
 
-["taxKids","taxEarners"].forEach(id=>q(id).addEventListener("input",renderTaxes));
+["taxKids","taxEarners","federalExciseRate"].forEach(id=>q(id).addEventListener("input",renderTaxes));
 q("stateLocalRate").addEventListener("input",()=>{
   profileMode=false;
   q("stateLocalStatus").textContent="Manual state/local rate · "+(+q("stateLocalRate").value||0).toFixed(1)+"%";
   q("stateLocalTitle").textContent="Manual state/local rate";
-  q("slSales").textContent="—";q("slProperty").textContent="—";q("slIncome").textContent="—";
+  q("slSales").textContent="—";q("slProperty").textContent="—";q("slIncome").textContent="—";q("slOther").textContent="—";
   renderTaxes();
 });
 ["taxIncome"].forEach(id=>q(id).addEventListener("input",()=>{syncLocalizedRate();renderTaxes()}));
 q("tariffCost").addEventListener("input",renderTaxes);
+q("govFees").addEventListener("input",renderTaxes);
 
 q("taxZipBtn").addEventListener("click",async()=>{
   const zip=q("taxZip").value.trim();
