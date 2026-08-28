@@ -25,7 +25,7 @@ window.WF = (() => {
       setMoney(el,value(el),digits);
       el.addEventListener("focus",()=>{
         el.value=String(value(el));
-        requestAnimationFrame(()=>{try{el.select()}catch{}});
+        try{el.select()}catch{}
       });
       el.addEventListener("blur",()=>setMoney(el,value(el),digits));
     });
