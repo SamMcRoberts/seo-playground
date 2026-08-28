@@ -6,33 +6,37 @@ export default async (request: Request) => {
     return Response.json({ error: "A five-digit ZIP code is required." }, { status: 400 });
   }
 
-  const censusUrl = new URL("https://api.census.gov/data/2024/acs/acs5");
-  censusUrl.searchParams.set("get", "NAME,B25077_001E,B19013_001E");
-  censusUrl.searchParams.set("for", "zip code tabulation area:" + zip);
+  const geoid = "86000US" + zip;
+  const reporterUrl = new URL("https://api.censusreporter.org/1.0/data/show/latest");
+  reporterUrl.searchParams.set("table_ids", "B19013,B25077");
+  reporterUrl.searchParams.set("geo_ids", geoid);
 
   try {
-    const response = await fetch(censusUrl, {
-      headers: { "Accept": "application/json" },
+    const response = await fetch(reporterUrl, {
+      headers: {
+        "Accept": "application/json",
+        "User-Agent": "WFCCI/1.0 (working-family-inflation.netlify.app)"
+      },
       signal: AbortSignal.timeout(10000)
     });
 
     if (!response.ok) {
       return Response.json(
-        { error: "Census API request failed.", status: response.status },
+        { error: "ACS data service request failed.", status: response.status },
         { status: 502 }
       );
     }
 
-    const data = await response.json();
-    if (!Array.isArray(data) || !data[0] || !data[1]) {
+    const payload = await response.json();
+    const geo = payload?.data?.[geoid];
+    const home = Number(geo?.B25077?.estimate?.B25077001);
+    const income = Number(geo?.B19013?.estimate?.B19013001);
+    const name = payload?.geography?.[geoid]?.name || ("ZCTA5 " + zip);
+    const vintage = payload?.release?.name || "ACS 5-year";
+
+    if (!geo) {
       return Response.json({ error: "No ACS data found for that ZIP code." }, { status: 404 });
     }
-
-    const headers = data[0];
-    const values = data[1];
-    const row = Object.fromEntries(headers.map((key: string, i: number) => [key, values[i]]));
-    const home = Number(row.B25077_001E);
-    const income = Number(row.B19013_001E);
 
     if (!Number.isFinite(home) || home <= 0 || !Number.isFinite(income) || income <= 0) {
       return Response.json({ error: "ACS data for that ZIP code is incomplete." }, { status: 422 });
@@ -40,11 +44,11 @@ export default async (request: Request) => {
 
     return Response.json(
       {
-        name: row.NAME,
+        name,
         zip,
         home: Math.round(home),
         income: Math.round(income),
-        vintage: "2024 ACS 5-year"
+        vintage
       },
       {
         headers: {
@@ -52,9 +56,9 @@ export default async (request: Request) => {
         }
       }
     );
-  } catch (error) {
+  } catch {
     return Response.json(
-      { error: "Census lookup is temporarily unavailable." },
+      { error: "ACS ZIP lookup is temporarily unavailable." },
       { status: 502 }
     );
   }
