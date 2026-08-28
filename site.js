@@ -2,6 +2,79 @@ window.WF = (() => {
   const money = (v, digits=0) => new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:digits}).format(Number(v)||0);
   const number = v => new Intl.NumberFormat("en-US",{maximumFractionDigits:0}).format(Number(v)||0);
   const pct = (v,d=1) => (Number(v)>=0?"+":"") + Number(v).toFixed(d) + "%";
+  const value = v => {
+    const raw = typeof v === "object" && v ? v.value : v;
+    const n = Number(String(raw ?? "").replace(/[^0-9+\-.]/g,""));
+    return Number.isFinite(n) ? n : 0;
+  };
+  const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  const note = (text,label="More information") => '<button class="note-trigger" type="button" aria-label="'+esc(label)+'" data-note="'+esc(text)+'">i</button>';
+
+  function setMoney(el,v,digits=0){
+    if(!el)return;
+    const n=Number(v)||0;
+    el.dataset.raw=String(n);
+    el.value=money(n,digits);
+  }
+
+  function bindMoneyInputs(root=document){
+    root.querySelectorAll("input[data-money]").forEach(el=>{
+      if(el.dataset.moneyBound)return;
+      el.dataset.moneyBound="1";
+      const digits=Number(el.dataset.moneyDigits||0);
+      setMoney(el,value(el),digits);
+      el.addEventListener("focus",()=>{
+        el.value=String(value(el));
+        requestAnimationFrame(()=>{try{el.select()}catch{}});
+      });
+      el.addEventListener("blur",()=>setMoney(el,value(el),digits));
+    });
+  }
+
+  function initNotes(){
+    let pop=document.querySelector(".note-popover");
+    if(!pop){
+      pop=document.createElement("div");
+      pop.className="note-popover";
+      pop.setAttribute("role","tooltip");
+      pop.hidden=true;
+      document.body.appendChild(pop);
+    }
+    let pinned=null;
+    const place=btn=>{
+      const r=btn.getBoundingClientRect(),w=Math.min(320,window.innerWidth-24);
+      pop.style.width=w+"px";
+      const left=Math.max(12,Math.min(window.innerWidth-w-12,r.left+r.width/2-w/2));
+      const above=r.top>190;
+      pop.style.left=left+"px";
+      pop.style.top=(above?Math.max(12,r.top-10):Math.min(window.innerHeight-12,r.bottom+10))+"px";
+      pop.style.transform=above?"translateY(-100%)":"none";
+    };
+    const show=(btn,pin=false)=>{
+      pop.textContent=btn.dataset.note||"";
+      pop.hidden=false;place(btn);
+      if(pin)pinned=btn;
+    };
+    const hide=()=>{if(!pinned){pop.hidden=true;pop.textContent=""}};
+    document.querySelectorAll(".note-trigger[data-note]").forEach(btn=>{
+      if(btn.dataset.noteBound)return;
+      btn.dataset.noteBound="1";
+      btn.addEventListener("mouseenter",()=>show(btn));
+      btn.addEventListener("mouseleave",hide);
+      btn.addEventListener("focus",()=>show(btn));
+      btn.addEventListener("blur",hide);
+      btn.addEventListener("click",e=>{
+        e.stopPropagation();
+        if(pinned===btn){pinned=null;pop.hidden=true}
+        else{pinned=btn;show(btn,true)}
+      });
+    });
+    document.addEventListener("click",()=>{pinned=null;pop.hidden=true});
+    window.addEventListener("resize",()=>{if(pinned&&!pop.hidden)place(pinned)});
+    window.addEventListener("scroll",()=>{if(pinned&&!pop.hidden)place(pinned)},{passive:true});
+  }
+
+  document.addEventListener("DOMContentLoaded",()=>{bindMoneyInputs();initNotes()});
 
   function lineChart(el, rows, series, opts={}) {
     if(!el || !rows?.length) return;
@@ -57,5 +130,5 @@ window.WF = (() => {
     return 360;
   }
 
-  return {money,number,pct,lineChart,mortgagePayment,monthsToLtv80};
+  return {money,number,pct,value,setMoney,bindMoneyInputs,note,initNotes,lineChart,mortgagePayment,monthsToLtv80};
 })();
