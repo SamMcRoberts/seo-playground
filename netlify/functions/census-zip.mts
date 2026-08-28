@@ -8,7 +8,7 @@ export default async (request: Request) => {
 
   const geoid = "86000US" + zip;
   const reporterUrl = new URL("https://api.censusreporter.org/1.0/data/show/latest");
-  reporterUrl.searchParams.set("table_ids", "B19013,B25077");
+  reporterUrl.searchParams.set("table_ids", "B19113,B25077");
   reporterUrl.searchParams.set("geo_ids", geoid);
 
   try {
@@ -30,7 +30,7 @@ export default async (request: Request) => {
     const payload = await response.json();
     const geo = payload?.data?.[geoid];
     const home = Number(geo?.B25077?.estimate?.B25077001);
-    const income = Number(geo?.B19013?.estimate?.B19013001);
+    const income = Number(geo?.B19113?.estimate?.B19113001);
     const name = payload?.geography?.[geoid]?.name || ("ZCTA5 " + zip);
     const vintage = payload?.release?.name || "ACS 5-year";
 
