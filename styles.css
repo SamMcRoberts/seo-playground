@@ -188,3 +188,9 @@ img,svg{display:block;max-width:100%}
     text-overflow:clip;
   }
 }
+
+.hero-kicker .kicker-years{margin-left:.5em}
+@media(max-width:640px){
+  .hero-kicker span{display:block}
+  .hero-kicker .kicker-years{margin-left:0;margin-top:2px}
+}
