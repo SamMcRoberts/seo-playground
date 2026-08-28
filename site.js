@@ -5,7 +5,10 @@ window.WF = (() => {
 
   function lineChart(el, rows, series, opts={}) {
     if(!el || !rows?.length) return;
-    const W=1000,H=390,p={l:62,r:24,t:22,b:48};
+    const mobile=window.matchMedia("(max-width: 640px)").matches;
+    const W=Math.max(300,Math.round(el.getBoundingClientRect().width||1000)),H=mobile?280:390,p=mobile?{l:46,r:12,t:18,b:42}:{l:62,r:24,t:22,b:48};
+    el.setAttribute("viewBox","0 0 "+W+" "+H);
+    el.setAttribute("preserveAspectRatio","none");
     const all=rows.flatMap(r=>series.map(s=>Number(r[s.key]))).filter(Number.isFinite);
     const yMin=opts.yMin ?? Math.min(...all), yMax=opts.yMax ?? Math.max(...all), span=Math.max(1,yMax-yMin);
     const lo=opts.yMin ?? Math.floor((yMin-span*.08)/10)*10, hi=opts.yMax ?? Math.ceil((yMax+span*.08)/10)*10;
@@ -21,7 +24,7 @@ window.WF = (() => {
       add("line",{x1:p.l,x2:W-p.r,y1:yy,y2:yy,stroke:"#d8d4c9","stroke-width":"1"});
       const t=add("text",{x:p.l-12,y:yy+4,fill:"#737871","font-size":"12","text-anchor":"end"});t.textContent=opts.yFormatter?opts.yFormatter(val):Math.round(val);
     }
-    const desired=window.innerWidth<=640?5:7,step=Math.max(1,Math.ceil((rows.length-1)/(desired-1)));
+    const desired=mobile?5:7,step=Math.max(1,Math.ceil((rows.length-1)/(desired-1)));
     rows.forEach((r,i)=>{if(i===0||i===rows.length-1||i%step===0){const t=add("text",{x:x(i),y:H-17,fill:"#737871","font-size":"12","text-anchor":i===0?"start":i===rows.length-1?"end":"middle"});t.textContent=r.label}});
     series.forEach(s=>{const d=rows.map((r,i)=>(i?"L":"M")+" "+x(i)+" "+y(Number(r[s.key]))).join(" ");add("path",{d,fill:"none",stroke:s.color,"stroke-width":opts.strokeWidth||4,"stroke-linecap":"round","stroke-linejoin":"round"});if(opts.showPoints){rows.forEach((r,i)=>add("circle",{cx:x(i),cy:y(Number(r[s.key])),r:opts.pointRadius||4,fill:s.color,stroke:"#fbfaf6","stroke-width":"2"}))}});
     const focus=add("g",{"aria-hidden":"true"});focus.style.display="none";
