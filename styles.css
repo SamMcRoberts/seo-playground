@@ -202,3 +202,15 @@ img,svg{display:block;max-width:100%}
 .coverage-grid span{display:inline-flex;align-items:center;min-height:34px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#f0ede5;color:#414843;font-size:12px;font-weight:700}
 @media(max-width:900px){.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.grid-4{grid-template-columns:1fr 1fr}.coverage-card{padding:15px}.coverage-grid{gap:6px}.coverage-grid span{font-size:11px;padding:5px 8px}}
+
+.legend-line{display:inline-block;width:25px;height:0;border-top:4px solid;border-radius:999px}
+.legend-line.wf{border-color:var(--green)}
+.legend-line.cpi{border-color:var(--blue);border-top-style:dashed}
+.tax-key{display:inline-block;width:18px;height:10px;border-radius:3px;flex:0 0 auto;border:1px solid rgba(17,19,16,.18)}
+.tax-key.federal{background:var(--blue)}
+.tax-key.hidden{background:var(--green)}
+.tax-key.state{background:var(--purple)}
+.tax-key.excise{background:repeating-linear-gradient(135deg,var(--amber) 0 5px,#b8872d 5px 8px)}
+.tax-key.tariff{background:repeating-linear-gradient(45deg,var(--red) 0 5px,#c06a60 5px 8px)}
+.tax-key.fees{background:repeating-linear-gradient(90deg,var(--neutral) 0 4px,#89918d 4px 7px)}
+.tax-legend .chip{gap:7px}
