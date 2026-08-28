@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f0e8">
+<title>True Tax Burden — WFCCI</title><meta name="description" content="A working-family tax burden model that includes federal, payroll, state and local, corporate-incidence, excise, and tariff taxes.">
+<link rel="stylesheet" href="/styles.css"></head>
+<body>
+<header class="site-header">
+<nav class="nav-main shell" aria-label="Primary"><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><div class="desktop-nav"><a class="nav-link" href="/">Inflation</a><a class="nav-link" href="/homeownership.html">Homeownership</a><a class="nav-link" aria-current="page" href="/taxes.html">True tax burden</a><a class="nav-link" href="/trump-cost.html">Trump burden</a></div></nav>
+<div class="mobile-tabs" aria-label="Site sections"><a class="nav-link" href="/">Inflation</a><a class="nav-link" href="/homeownership.html">Homeownership</a><a class="nav-link" aria-current="page" href="/taxes.html">Taxes</a><a class="nav-link" href="/trump-cost.html">Trump burden</a></div>
+</header>
+
+<main>
+<section class="page-intro shell">
+<p class="kicker">The tax bill you do not see on one form</p>
+<h1 class="display">Your paycheck is not the whole <em>tax base.</em></h1>
+<p class="lead">A working household pays taxes directly, through payroll, through prices, through property, and through taxes legally charged to employers and businesses but economically passed to workers and consumers. This model puts those channels on one ledger without counting the same tax twice.</p>
+</section>
+
+<section class="section shell" style="padding-top:24px">
+<div class="control-panel">
+<div class="card card-pad">
+<p class="kicker">Benchmark family</p>
+<h2 style="margin:0;font-size:22px">Married filing jointly · two qualifying children</h2>
+<div class="field-grid" style="margin-top:18px">
+<div class="light-field"><label for="taxIncome">Cash wage income</label><input id="taxIncome" type="number" min="0" step="1000" value="128700"></div>
+<div class="light-field"><label for="taxKids">Qualifying children under 17</label><input id="taxKids" type="number" min="0" max="10" step="1" value="2"></div>
+<div class="light-field"><label for="stateLocalRate">State + local all-in rate</label><input id="stateLocalRate" type="number" min="0" max="30" step=".1" value="10.3"></div>
+<div class="light-field"><label for="tariffCost">Annual tariff burden</label><input id="tariffCost" type="number" min="0" step="50" value="1100"></div>
+</div>
+<p class="status">Default income is the 2024 median married-couple family income. State/local default is ITEP’s U.S. average for its fourth income quintile, which spans $80,400–$138,300 and excludes seniors.</p>
+</div>
+
+<div class="card card-pad">
+<p class="kicker">Modeled all-in burden</p>
+<div class="tax-hero-number" id="totalTaxRate">—</div>
+<div style="font-size:20px;font-weight:760" id="totalTaxDollars">—</div>
+<p class="muted">as a share of stated cash wages. Because employer payroll tax is included as an economic burden, the share of total labor compensation is also shown below.</p>
+<div class="assumption-strip" style="grid-template-columns:1fr 1fr">
+<div class="assumption"><strong id="compRate">—</strong><span>share of cash wages + employer FICA</span></div>
+<div class="assumption"><strong id="monthlyTax">—</strong><span>modeled tax burden per month</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section shell">
+<div class="section-head"><div><p class="kicker">One ledger</p><h2 class="section-title">Visible taxes plus the ones embedded in wages and prices.</h2></div><p>The stacked bar is proportional to the modeled tax dollars. It is not a 100%-of-income bar, so it does not visually exaggerate any component.</p></div>
+<div class="card card-pad">
+<div class="tax-stack" id="taxStack" aria-label="Tax burden composition"></div>
+<div class="chip-grid" style="margin-bottom:20px"><span class="chip">Federal income</span><span class="chip">Employee payroll</span><span class="chip">Employer payroll</span><span class="chip">Federal corporate incidence</span><span class="chip">Federal excise</span><span class="chip">State & local</span><span class="chip">Tariffs</span></div>
+<div class="grid-3" id="taxCards"></div>
+</div>
+</section>
+
+<section class="dark-section">
+<div class="shell">
+<div class="section-head"><div><p class="kicker">Hidden incidence</p><h2 class="section-title">Who writes the check is not always who bears the cost.</h2></div><p>CBO treats the employer share of payroll tax as borne by workers through lower compensation, allocates corporate income tax partly to labor and capital owners, and allocates excise taxes according to household consumption.</p></div>
+<div class="grid-3">
+<article class="dark-card"><h3>Employer payroll tax</h3><p>The employer remits another 6.2% Social Security tax up to the wage cap plus 1.45% Medicare. CBO’s incidence method treats that as part of workers’ economic tax burden.</p></article>
+<article class="dark-card"><h3>Business taxes in prices</h3><p>ITEP’s state/local model includes business sales and excise taxes, corporate income taxes, and other business/property taxes that are not itemized on a household receipt.</p></article>
+<article class="dark-card"><h3>Customs duties</h3><p>Tariffs are taxes collected at the border. The Budget Lab’s current-law estimate puts their ultimate consumer cost at roughly $1,100 per household per year.</p></article>
+</div>
+</div>
+</section>
+
+<section class="section shell">
+<div class="section-head"><div><p class="kicker">State & local anatomy</p><h2 class="section-title">The 10.3% is already broad.</h2></div><p>ITEP’s fourth-quintile U.S. average covers 99.7% of state and local tax revenue and explicitly excludes senior households, making it unusually well matched to the working-family benchmark.</p></div>
+<div class="grid-3">
+<article class="info-card"><span class="big">3.9%</span><h3>Sales & excise</h3><p>2.2% general sales paid by individuals, 0.6% other individual sales/excise, and 1.1% business sales/excise incidence.</p></article>
+<article class="info-card"><span class="big">3.2%</span><h3>Property</h3><p>2.7% home/rent/car property taxes plus 0.5% other property-tax incidence.</p></article>
+<article class="info-card"><span class="big">3.1%</span><h3>Income</h3><p>3.0% personal state/local income tax plus 0.1% corporate income-tax incidence.</p></article>
+</div>
+</section>
+
+<section class="section shell" id="method">
+<div class="section-head"><div><p class="kicker">Method & limits</p><h2 class="section-title">“True” means incidence-aware, not magically exact.</h2></div><p>There is no single observable receipt for taxes passed through wages and prices. The model therefore combines current statutory taxes with established incidence estimates and labels each assumption.</p></div>
+<div class="grid-3">
+<article class="info-card"><h3>2026 federal income tax</h3><p>Married-filing-jointly 2026 brackets, $32,200 standard deduction, and modeled $2,200 Child Tax Credit per qualifying child, subject to the usual eligibility rules.</p></article>
+<article class="info-card"><h3>Federal hidden taxes</h3><p>Employer payroll is calculated under 2026 Social Security/Medicare law. Federal excise uses CBO’s 0.6% middle-quintile effective rate. Federal corporate incidence uses a conservative 0.8% fourth-quintile CBO/CRS benchmark.</p></article>
+<article class="info-card"><h3>No double counting</h3><p>The state/local 10.3% already includes state corporate taxes, business sales/excise, and other state/local taxes. Those are not added again. Tariffs are separate federal customs duties.</p></article>
+</div>
+<div class="callout" style="margin-top:16px"><strong>Denominator check:</strong> the headline rate divides all modeled taxes by the salary a worker sees. A second rate divides by salary plus employer FICA. Both are shown because using only one denominator can make the same burden look artificially larger or smaller.</div>
+</section>
+
+<section class="source-section"><div class="shell"><p class="kicker">Data & sources</p><div class="source-list">
+<a class="source-link" href="https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill" target="_blank" rel="noreferrer"><strong>IRS</strong><span>2026 married-filing-jointly brackets and $32,200 standard deduction.</span></a>
+<a class="source-link" href="https://www.ssa.gov/cola/factsheets/2026.html" target="_blank" rel="noreferrer"><strong>SSA</strong><span>2026 employee/employer payroll rates and $184,500 Social Security taxable maximum.</span></a>
+<a class="source-link" href="https://www.cbo.gov/publication/62300" target="_blank" rel="noreferrer"><strong>CBO</strong><span>Federal tax-incidence framework: individual income, payroll, corporate income, and excise taxes.</span></a>
+<a class="source-link" href="https://www.cbo.gov/publication/62631" target="_blank" rel="noreferrer"><strong>CBO</strong><span>2022 middle-quintile federal excise effective rate: 0.6%.</span></a>
+<a class="source-link" href="https://itep.org/u-s-average-who-pays-7th-edition/" target="_blank" rel="noreferrer"><strong>ITEP</strong><span>Fourth-quintile U.S.-average state/local burden: 10.3%; senior taxpayers excluded; 99.7% of state/local tax revenue represented.</span></a>
+<a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs" target="_blank" rel="noreferrer"><strong>Budget Lab</strong><span>August 24, 2026 current-law tariff estimate: about $1,100 per household annually.</span></a>
+</div></div></section>
+</main>
+
+<footer class="site-footer"><div class="shell"><div class="footer-grid"><div><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><p class="small">A tax burden should include taxes that reduce compensation and raise prices, not just the number on Form 1040.</p></div><nav class="footer-nav" aria-label="Footer"><a href="/">Inflation</a><a href="/homeownership.html">Homeownership</a><a href="/taxes.html">True tax burden</a><a href="/trump-cost.html">Trump burden</a></nav></div><div class="footer-note">This is an incidence model for a benchmark working household, not tax-return preparation or a claim that every family bears identical indirect tax rates.</div></div></footer>
+
+<script src="/site.js"></script>
+<script>
+const q=id=>document.getElementById(id);
+function federalIncomeTax(gross,kids){
+  const taxable=Math.max(0,gross-32200), brackets=[[24800,.10],[100800,.12],[211400,.22],[403550,.24],[512450,.32],[768700,.35],[Infinity,.37]];
+  let tax=0,last=0;
+  for(const [cap,rate] of brackets){if(taxable<=last)break;const slice=Math.min(taxable,cap)-last;tax+=slice*rate;last=cap}
+  const ctc=Math.max(0,Math.floor(kids))*2200;
+  return Math.max(0,tax-ctc);
+}
+function payroll(gross,employee=true){
+  const ss=Math.min(gross,184500)*.062, medicare=gross*.0145, addl=employee?Math.max(0,gross-250000)*.009:0;
+  return ss+medicare+addl;
+}
+function renderTaxes(){
+  const income=Math.max(0,+q("taxIncome").value||0),kids=Math.max(0,+q("taxKids").value||0),sl=Math.max(0,+q("stateLocalRate").value||0)/100,tariffs=Math.max(0,+q("tariffCost").value||0);
+  const parts=[
+    {name:"Federal income",v:federalIncomeTax(income,kids),note:"2026 MFJ brackets, standard deduction and modeled CTC",cls:"federal"},
+    {name:"Employee payroll",v:payroll(income,true),note:"Social Security + Medicare withheld from wages",cls:"federal"},
+    {name:"Employer payroll",v:payroll(income,false),note:"Economic incidence treated as lower worker compensation",cls:"hidden"},
+    {name:"Federal corporate incidence",v:income*.008,note:"0.8% fourth-quintile incidence benchmark",cls:"hidden"},
+    {name:"Federal excise",v:income*.006,note:"0.6% middle-quintile CBO benchmark",cls:"hidden"},
+    {name:"State & local",v:income*sl,note:(sl*100).toFixed(1)+"% all-in ITEP-style incidence",cls:"state"},
+    {name:"Tariffs / customs",v:tariffs,note:"Current-law consumer burden estimate",cls:"tariff"}
+  ];
+  const total=parts.reduce((a,b)=>a+b.v,0),comp=income+payroll(income,false),rate=income?total/income*100:0,compRate=comp?total/comp*100:0;
+  q("totalTaxRate").textContent=rate.toFixed(1)+"%";q("totalTaxDollars").textContent=WF.money(total)+" per year";q("compRate").textContent=compRate.toFixed(1)+"%";q("monthlyTax").textContent=WF.money(total/12);
+  q("taxStack").innerHTML=parts.map(p=>'<i class="'+p.cls+'" style="width:'+(total?p.v/total*100:0)+'%" title="'+p.name+' '+WF.money(p.v)+'"></i>').join("");
+  q("taxCards").innerHTML=parts.map(p=>'<article class="info-card"><h3>'+p.name+'</h3><span class="big">'+WF.money(p.v)+'</span><p>'+p.note+' · '+(income?p.v/income*100:0).toFixed(1)+'% of cash wages.</p></article>').join("");
+}
+["taxIncome","taxKids","stateLocalRate","tariffCost"].forEach(id=>q(id).addEventListener("input",renderTaxes));renderTaxes();
+</script>
+</body></html>
