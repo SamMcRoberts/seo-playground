@@ -1,14 +1,150 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f0e8"><title>Trump Policy Household Cost Tracker — WFCCI</title><meta name="description" content="A source-based tracker of the annual household cost of Trump administration policies since January 2025, with offsets shown separately."><link rel="stylesheet" href="/site.css"></head>
-<body data-page="trump">
-<header class="site-header"><div class="nav-main shell"><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><nav class="desktop-nav" aria-label="Primary"><a class="nav-link" data-nav="inflation" href="/">Inflation</a><a class="nav-link" data-nav="home" href="/homeownership.html">Homeownership</a><a class="nav-link" data-nav="tax" href="/tax-burden.html">True tax burden</a><a class="nav-link" data-nav="trump" href="/trump-cost.html">Trump policy cost</a></nav></div><nav class="mobile-tabs" aria-label="Primary mobile"><a class="nav-link" data-nav="inflation" href="/">Inflation</a><a class="nav-link" data-nav="home" href="/homeownership.html">Home</a><a class="nav-link" data-nav="tax" href="/tax-burden.html">Taxes</a><a class="nav-link" data-nav="trump" href="/trump-cost.html">Trump cost</a></nav></header>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f0e8">
+<title>Trump Policy Household Burden — WFCCI</title><meta name="description" content="A source-based estimate of the working-household financial burden from Trump administration policies since January 2025, including tariffs, immigration, energy policy, fuel, tax offsets, and policy uncertainty.">
+<link rel="stylesheet" href="/styles.css"></head>
+<body>
+<header class="site-header">
+<nav class="nav-main shell" aria-label="Primary"><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><div class="desktop-nav"><a class="nav-link" href="/">Inflation</a><a class="nav-link" href="/homeownership.html">Homeownership</a><a class="nav-link" href="/taxes.html">True tax burden</a><a class="nav-link" aria-current="page" href="/trump-cost.html">Trump burden</a></div></nav>
+<div class="mobile-tabs" aria-label="Site sections"><a class="nav-link" href="/">Inflation</a><a class="nav-link" href="/homeownership.html">Homeownership</a><a class="nav-link" href="/taxes.html">Taxes</a><a class="nav-link" aria-current="page" href="/trump-cost.html">Trump burden</a></div>
+</header>
+
 <main>
-<section class="page-intro shell"><p class="kicker">Trump administration household-cost tracker · Jan 2025–Aug 2026</p><h1 class="display">What has the second Trump administration added to the average household’s <em>cost burden?</em></h1><p class="lead">The headline uses only policy channels with a defensible, household-wide annual dollar estimate and a consistent time series. Right now that means tariffs. Tax cuts and other offsets are shown separately so the page does not manufacture a politically convenient net number.</p></section>
-<section class="shell grid-2"><article class="card card-pad"><p class="kicker">Current gross added burden</p><div class="tax-hero-number" style="color:var(--danger)">$1,100</div><h2 style="margin:0;font-size:24px">per average household / year</h2><p class="muted">The Budget Lab’s Aug. 24, 2026 current-law estimate for the consumer-welfare cost of current Trump-administration tariffs.</p></article><article class="card card-pad"><p class="kicker">Approximate cumulative exposure</p><div class="tax-hero-number" style="color:var(--gold)" id="cumulativeExposure">—</div><h2 style="margin:0;font-size:24px">annualized-equivalent dollars since Jan. 20, 2025</h2><p class="muted">A trapezoidal integration of the published annualized tariff-cost snapshots below. This is a rough exposure measure, not a claim that every household literally paid that amount in cash.</p></article></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">Trend line</p><h2 class="section-title">The household tariff burden surged, then fell sharply.</h2></div><p>The chart tracks published Budget Lab estimates as the tariff regime changed. Tap or drag for exact snapshot values.</p></div><div class="card chart-card"><div class="chart-toolbar"><div class="legend"><span class="legend-item"><i class="dot red"></i>Annualized tariff household cost</span></div><div class="chart-note" id="trumpReadout" aria-live="polite">Tap or drag across the chart</div></div><div class="chart-wrap"><svg id="trumpChart" role="img" aria-label="Estimated annualized household cost of Trump administration tariffs from January 2025 to August 2026"></svg></div></div></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">Policy ledger</p><h2 class="section-title">Gross costs and offsets are not the same thing.</h2></div><p>Different models answer different questions. Tariff estimates measure consumer purchasing-power loss. Tax-law estimates depend heavily on the baseline used. Benefit and healthcare changes are concentrated among affected households, so averaging them across everyone can be misleading.</p></div><div class="policy-ledger"><article class="policy-card cost"><div class="value">+$1,100</div><h3>Current tariff burden</h3><p>Average annual household consumer-welfare loss under current law, Budget Lab, Aug. 24, 2026.</p></article><article class="policy-card offset"><div class="value">−$1,800</div><h3>Middle-income 2026 tax offset</h3><p>Tax Policy Center estimate of the average 2026 tax cut for middle-income households under the 2025 OBBBA, relative to current law.</p></article><article class="policy-card neutral"><div class="value">−$700</div><h3>Simple quantified net</h3><p>Tariff burden minus the middle-income tax-cut estimate. This is illustrative only because the two estimates use different populations, concepts and baselines.</p></article></div><div class="callout" style="margin-top:18px"><strong>Not forced into the headline:</strong> Medicaid, ACA, SNAP, immigration, energy, regulation and deficit-interest effects can materially affect households, but the burden is uneven or the household-wide annual dollar estimate is too model-dependent to mix into a single “average family” number without false precision.</div></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">What the tariff number means</p><h2 class="section-title">It is a consumer-welfare estimate, not a customs receipt divided by households.</h2></div><p>The Budget Lab models how tariffs change consumer prices, substitution, output and incomes. Its current-law estimate is about a 0.7% ultimate consumer-price impact and roughly $1,100 per household annually.</p></div><div class="grid-3"><article class="info-card"><span class="big">11.0%</span><h3>Statutory tariff rate</h3><p>Budget Lab estimate as of Aug. 24, 2026.</p></article><article class="info-card"><span class="big">0.7%</span><h3>Ultimate consumer-price impact</h3><p>Current-law estimate after the 2026 tariff changes.</p></article><article class="info-card"><span class="big">$1.9T</span><h3>10-year tariff revenue</h3><p>Budget Lab current-law conventional estimate, before dynamic growth effects reduce the net.</p></article></div></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">Snapshot data</p><h2 class="section-title">Every point on the graph has a source.</h2></div><p>Values are the published average-household short-run consumer-loss estimate where available. March 3 uses the midpoint of the Budget Lab’s $1,600–$2,000 range.</p></div><div class="card table-wrap"><table><thead><tr><th>Date</th><th>Annualized cost</th><th>Policy snapshot</th><th>Source</th></tr></thead><tbody id="trumpTable"></tbody></table></div></section>
-<section class="source-section"><div class="shell"><p class="kicker">Data & sources</p><h2 class="section-title">Primary models used on this page.</h2><div class="source-list"><a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs"><strong>Budget Lab</strong><span>State of U.S. Tariffs, updated Aug. 24, 2026: current statutory tariff rate 11.0%, consumer-price impact about 0.7%, household cost about $1,100/year.</span></a><a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs-scotus-ruling-update"><strong>Budget Lab</strong><span>Feb. 20, 2026 post-SCOTUS tariff estimate: about $800 per average household in the short run.</span></a><a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs-april-15-2025"><strong>Budget Lab</strong><span>Apr. 15, 2025 peak snapshot: about $4,900 per average household.</span></a><a class="source-link" href="https://taxpolicycenter.org/taxvox/what-will-tax-provisions-big-budget-bill-really-do"><strong>Tax Policy Center</strong><span>2026 OBBBA tax provisions: average middle-income tax cut about $1,800; average across all households about $2,900.</span></a><a class="source-link" href="https://budgetlab.yale.edu/research/combined-distributional-effects-one-big-beautiful-bill-act-and-tariffs"><strong>Budget Lab</strong><span>Distributional interaction of tariff costs and the 2025 tax/spending package; useful context on why a single national net obscures large differences by income.</span></a></div></div></section>
+<section class="page-intro shell">
+<p class="kicker">Policy cost tracker · Jan. 20, 2025 → now</p>
+<h1 class="display">What has Trump policy added to a working family’s <em>annual burden?</em></h1>
+<p class="lead">The answer is not one magic number. Some costs can be priced cleanly at the household level; others are real but overlap with those costs or do not have a defensible household-dollar conversion. This tracker adds only what can be added without double counting, then shows the wider exposure separately.</p>
+</section>
+
+<section class="section shell" style="padding-top:24px">
+<div class="control-panel">
+<div class="card card-pad">
+<p class="kicker">Working-household inputs</p>
+<div class="field-grid">
+<div class="light-field"><label for="annualSpend">Annual household spending</label><input id="annualSpend" type="number" min="0" step="1000" value="78535"></div>
+<div class="light-field"><label for="policyKids">Qualifying children</label><input id="policyKids" type="number" min="0" max="10" step="1" value="2"></div>
+<div class="light-field"><label for="tariffBurden">Current annual tariff burden</label><input id="tariffBurden" type="number" min="0" step="50" value="1100"></div>
+<div class="light-field"><label for="energyAnnual">Forward energy/health annualization</label><input id="energyAnnual" type="number" min="0" step="10" value="340"></div>
+</div>
+<p class="status">Defaults: BLS 2024 average consumer-unit spending; two qualifying children; Budget Lab Aug. 24, 2026 current-law tariff estimate; and a rough annualized $700B/15-year Energy Innovation consumer-cost exposure using today’s household count. The energy number is shown as a sensitivity because some tariff/inflation effects are already embedded in that model’s inputs.</p>
+</div>
+
+<div class="card card-pad">
+<p class="kicker">Best defensible current estimate</p>
+<div class="tax-hero-number" id="directBurden">—</div>
+<div style="font-size:20px;font-weight:760">per working household per year</div>
+<p class="muted">Direct, additive-safe priced burden: tariffs + IMF-implied labor-supply price effect − incremental Child Tax Credit relief.</p>
+<div class="assumption-strip" style="grid-template-columns:1fr 1fr">
+<div class="assumption"><strong id="monthlyBurden">—</strong><span>per month</span></div>
+<div class="assumption"><strong id="broadBurden">—</strong><span>broader annualized exposure*</span></div>
+</div>
+<p class="small">*Adds the forward energy/health annualization as a sensitivity. It is not treated as equally clean “current cash cost” because the Energy Innovation model incorporates some 2026 tariff/inflation pressure in source inputs.</p>
+</div>
+</div>
+</section>
+
+<section class="section shell">
+<div class="section-head"><div><p class="kicker">The priced ledger</p><h2 class="section-title">What can be converted to household dollars without inventing a number.</h2></div><p>The primary total uses a lived-status-quo baseline: what changed versus the household rules and prices in place when Trump took office, not a Congressional scoring baseline that assumes expiring tax provisions vanished.</p></div>
+<div class="policy-ledger" id="pricedLedger"></div>
+</section>
+
+<section class="section shell">
+<div class="section-head"><div><p class="kicker">Tariff policy over time</p><h2 class="section-title">The burden changed sharply as tariffs, court rulings, exemptions, and trade deals changed.</h2></div><p>These are discrete published Budget Lab model snapshots, not observed daily household bills. The horizontal axis uses actual calendar spacing; points are connected only to make the policy evolution legible.</p></div>
+<div class="card chart-card">
+<div class="chart-toolbar"><div class="legend"><span class="legend-item"><i class="dot red"></i>Modeled annual household tariff burden</span></div><div class="chart-note" id="tariffReadout">Aug. 24, 2026 · $1,100/yr</div></div>
+<div class="chart-wrap"><svg id="tariffChart" viewBox="0 0 1000 390" role="img" aria-label="Budget Lab modeled household tariff burden snapshots from April 2025 through August 2026"></svg></div>
+<div class="chart-scrubber"><input type="range" min="0" max="6" value="6" step="1" data-scrubber-for="tariffChart" aria-label="Select published tariff estimate"></div>
+</div>
+</section>
+
+<section class="dark-section">
+<div class="shell">
+<div class="section-head"><div><p class="kicker">The wider burden</p><h2 class="section-title">Real channels that should be counted conceptually, but not stacked into a fake precise total.</h2></div><p>Adding GDP loss, hiring loss, price effects, and uncertainty on top of one another would count the same economic damage several times. They belong in the ledger, but not all in the arithmetic sum.</p></div>
+<div class="grid-3">
+<article class="dark-card"><h3>Energy, electricity & cancelled renewables</h3><p>Energy Innovation models seven policy groups since January 2025, including OBBBA energy provisions, power-plant rule changes, repeal of tailpipe rules, limits on wind permitting, hydrogen-hub funding cancellations, and cancellation of the $7B Solar for All program. It estimates $650B in extra household energy costs through 2040, plus $43B in healthcare costs.</p></article>
+<article class="dark-card"><h3>Fuel</h3><p>The same model estimates federal transportation-policy reversals raise average gasoline prices 14% in 2035 and 26% in 2040. It explicitly distinguishes those policy effects from near-term Iran-war and other market pressures, so this tracker does not lazily charge every gasoline spike to domestic policy.</p></article>
+<article class="dark-card"><h3>Jobs & GDP</h3><p>Energy Innovation estimates these federal energy-policy changes reduce U.S. GDP by $2.3T cumulatively through 2040 and cost 820,000 jobs per year on average over the next decade. Those losses matter to households, but converting the aggregate directly into “$X per household” would double-count and misallocate incidence.</p></article>
+<article class="dark-card"><h3>Trade-policy uncertainty</h3><p>Atlanta Fed survey evidence found policy uncertainty, dominated by tariffs, led firms to plan roughly 13% less hiring and 16% less investment over the following six months. This is a household burden through weaker labor demand and growth, but no credible source gives a clean per-household dollar incidence.</p></article>
+<article class="dark-card"><h3>Household caution</h3><p>A 2026 Federal Reserve household study finds tariff-exposed retail prices rose while purchases fell much more; aggregate spending on affected goods fell about three times as much as prices rose, with much of the contraction tied to pessimism and precautionary behavior.</p></article>
+<article class="dark-card"><h3>Trade agreements & retaliation</h3><p>Changes in China tariff rates, the U.K. deal, auto rebates, exemptions, retaliation, court rulings, and replacement tariff authorities are already reflected in the dated Budget Lab tariff snapshots. They are not added a second time as a separate “deal uncertainty” tax.</p></article>
+</div>
+</div>
+</section>
+
+<section class="section shell">
+<div class="section-head"><div><p class="kicker">What is in the energy model</p><h2 class="section-title">The “cancelled renewables” burden is not hand-waving.</h2></div><p>The July 2026 Energy Innovation model specifically enumerates policy changes and runs them through its Energy Policy Simulator. Those effects are forward-looking, not a claim that every dollar has already hit a 2026 utility bill.</p></div>
+<div class="chip-grid">
+<span class="chip">OBBBA energy provisions</span><span class="chip">Power-plant rules</span><span class="chip">Endangerment Finding repeal</span><span class="chip">Tailpipe standards</span><span class="chip">State tailpipe waivers</span><span class="chip">Wind-permitting restrictions</span><span class="chip">Hydrogen-hub cancellations</span><span class="chip">45V natural-gas hydrogen rules</span><span class="chip">$7B Solar for All cancellation</span>
+</div>
+<div class="assumption-strip" style="margin-top:22px">
+<div class="assumption"><strong>$650B</strong><span>extra household energy costs through 2040</span></div>
+<div class="assumption"><strong>$43B</strong><span>extra healthcare costs through 2040</span></div>
+<div class="assumption"><strong>+$460</strong><span>average household energy cost in 2035</span></div>
+<div class="assumption"><strong>+$490</strong><span>average household energy cost in 2040</span></div>
+</div>
+</section>
+
+<section class="section shell" id="method">
+<div class="section-head"><div><p class="kicker">Method</p><h2 class="section-title">A floor, a broader exposure, and no bullshit precision.</h2></div><p>The tracker intentionally separates additive household-dollar estimates from overlapping macroeconomic channels.</p></div>
+<div class="grid-3">
+<article class="info-card"><h3>1. Current priced burden</h3><p>Current-law tariff burden + 0.3% of household spending from the IMF’s estimated end-2026 consumer-price effect of reduced immigration − $200 per qualifying child in incremental Child Tax Credit relief versus the pre-2025 $2,000 credit.</p></article>
+<article class="info-card"><h3>2. Broader annualized exposure</h3><p>Adds a rough $340/year household annualization of Energy Innovation’s rounded $700B combined energy + healthcare consumer cost over 15 years. It is displayed separately because the report says some tariff and inflation pressure is already embedded in source inputs.</p></article>
+<article class="info-card"><h3>3. Unpriced but real</h3><p>Employment, GDP, investment, trade-policy uncertainty, precautionary behavior, and market volatility are disclosed with source estimates but not monetized into the household total absent a defensible incidence model.</p></article>
+</div>
+<div class="callout" style="margin-top:16px"><strong>Why the tax offset is only $200 per child:</strong> the benchmark is lived conditions at the start of 2025. The 2025 law raised the maximum CTC from $2,000 to $2,200. Treating the full extension of pre-existing TCJA rates as a new household windfall would mix a statutory-expiration scoring baseline with a lived-experience baseline.</div>
+</section>
+
+<section class="source-section"><div class="shell"><p class="kicker">Data & sources</p><div class="source-list">
+<a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs" target="_blank" rel="noreferrer"><strong>Budget Lab · Aug. 24, 2026</strong><span>Current-law tariffs: ~0.7% ultimate consumer price effect and ~$1,100 annual household cost.</span></a>
+<a class="source-link" href="https://budgetlab.yale.edu/research/one-year-tariff-analysis-what-we-got-right-what-changed-and-what-we-learned" target="_blank" rel="noreferrer"><strong>Budget Lab · tariff history</strong><span>April 2, 2025 $3,800 estimate and discussion of model evolution and observed pass-through.</span></a>
+<a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs-april-15-2025" target="_blank" rel="noreferrer"><strong>Budget Lab · Apr. 15, 2025</strong><span>$4,900 annual household loss snapshot.</span></a>
+<a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs-may-12-2025" target="_blank" rel="noreferrer"><strong>Budget Lab · May 12, 2025</strong><span>$2,800 snapshot after China rate changes, U.K. deal, and auto rebate.</span></a>
+<a class="source-link" href="https://budgetlab.yale.edu/node/878/pdf" target="_blank" rel="noreferrer"><strong>Budget Lab · Jun. 17, 2025</strong><span>$2,000 annual household loss snapshot.</span></a>
+<a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs-october-17-2025" target="_blank" rel="noreferrer"><strong>Budget Lab · Oct. 17, 2025</strong><span>$1,800 short-run household loss snapshot.</span></a>
+<a class="source-link" href="https://budgetlab.yale.edu/research/state-us-tariffs-scotus-ruling-update" target="_blank" rel="noreferrer"><strong>Budget Lab · Feb. 20, 2026</strong><span>$800 household loss after the Supreme Court IEEPA ruling.</span></a>
+<a class="source-link" href="https://www.imf.org/en/Publications/CR/Issues/2026/03/17/United-States-2026-Article-IV-Consultation-Press-Release-Staff-Report-and-Statement-by-the-576372" target="_blank" rel="noreferrer"><strong>IMF · 2026 Article IV</strong><span>Reduced immigration expected to add about 0.3% to consumer prices by end-2026; agriculture and construction face labor-supply risks.</span></a>
+<a class="source-link" href="https://www.bls.gov/opub/reports/consumer-expenditures/2024/home.htm" target="_blank" rel="noreferrer"><strong>BLS Consumer Expenditures</strong><span>2024 average annual consumer-unit spending: $78,535.</span></a>
+<a class="source-link" href="https://energyinnovation.org/report/economic-consumer-cost-and-pollution-impacts-of-federal-energy-policy-changes/" target="_blank" rel="noreferrer"><strong>Energy Innovation · Jul. 8, 2026</strong><span>Federal energy-policy model: $650B extra energy cost, $43B healthcare cost, higher gasoline prices, GDP and job effects through 2040.</span></a>
+<a class="source-link" href="https://www.federalreserve.gov/econres/feds/paying-more-and-buying-less-2025-tariffs-and-us-household-spending.htm" target="_blank" rel="noreferrer"><strong>Federal Reserve · Aug. 2026 revision</strong><span>Household tariff pass-through, regressive welfare effects, and precautionary cutbacks in affected spending.</span></a>
+<a class="source-link" href="https://www.atlantafed.org/research-and-data/publications/policy-hub-macroblog/2025/05/15/uncertainty-over-trade-policy-will-cut-hiring-and-investment-say-business-execs" target="_blank" rel="noreferrer"><strong>Atlanta Fed · May 2025</strong><span>Surveyed firms planned about 13% less hiring and 16% less investment because of policy uncertainty, with tariffs the dominant concern.</span></a>
+<a class="source-link" href="https://www.irs.gov/credits-deductions/individuals/child-tax-credit" target="_blank" rel="noreferrer"><strong>IRS</strong><span>Maximum Child Tax Credit is $2,200 per qualifying child; benchmark counts the $200 increase versus the pre-2025 maximum as an offset.</span></a>
+</div></div></section>
 </main>
-<footer class="site-footer"><div class="shell"><div class="footer-grid"><div><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><p class="small">Policy accounting should expose assumptions, offsets and uncertainty rather than hide them.</p></div><nav class="footer-nav" aria-label="Footer"><a href="/">Inflation</a><a href="/homeownership.html">Homeownership</a><a href="/tax-burden.html">True tax burden</a><a href="/trump-cost.html">Trump policy cost</a></nav></div><div class="footer-note">Updated Aug. 27, 2026. This page is an estimate tracker, not an endorsement of or argument against any political figure.</div></div></footer>
-<script src="/app.js" defer></script></body></html>
+
+<footer class="site-footer"><div class="shell"><div class="footer-grid"><div><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><p class="small">Policy accounting should include costs and offsets, and should refuse to manufacture precision where the causal incidence is not identifiable.</p></div><nav class="footer-nav" aria-label="Footer"><a href="/">Inflation</a><a href="/homeownership.html">Homeownership</a><a href="/taxes.html">True tax burden</a><a href="/trump-cost.html">Trump burden</a></nav></div><div class="footer-note">This page is an empirical policy-cost model, not a partisan scorecard. Change the household inputs and inspect every source and assumption.</div></div></footer>
+
+<script src="/site.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const tariffPoints=[
+{label:"Apr 2 ’25",date:"2025-04-02",cost:3800},
+{label:"Apr 15 ’25",date:"2025-04-15",cost:4900},
+{label:"May 12 ’25",date:"2025-05-12",cost:2800},
+{label:"Jun 17 ’25",date:"2025-06-17",cost:2000},
+{label:"Oct 17 ’25",date:"2025-10-17",cost:1800},
+{label:"Feb 20 ’26",date:"2026-02-20",cost:800},
+{label:"Aug 24 ’26",date:"2026-08-24",cost:1100}
+].map(d=>({...d,t:Date.parse(d.date)}));
+WF.lineChart($("tariffChart"),tariffPoints,[{key:"cost",color:"#9a3d34"}],{
+  xValueKey:"t",yMin:0,yMax:5200,showPoints:true,pointRadius:5,yFormatter:v=>"$"+Math.round(v/1000)+"k",
+  onFocus:r=>$("tariffReadout").textContent=r.label+" · "+WF.money(r.cost)+"/yr modeled burden"
+});
+
+function render(){
+ const spend=Math.max(0,+$("annualSpend").value||0), kids=Math.max(0,+$("policyKids").value||0), tariff=Math.max(0,+$("tariffBurden").value||0), energy=Math.max(0,+$("energyAnnual").value||0);
+ const immigration=spend*.003,ctc=kids*200,direct=tariff+immigration-ctc,broad=direct+energy;
+ $("directBurden").textContent="≥ "+WF.money(direct);
+ $("monthlyBurden").textContent=WF.money(direct/12);
+ $("broadBurden").textContent="≈ "+WF.money(broad)+"/yr";
+ const cards=[
+  {cls:"cost",value:tariff,title:"Tariffs",text:"Budget Lab current-law annual household cost. The dated trend above shows how this changed with tariff rates, exemptions, deals, retaliation, legal rulings and replacement authorities."},
+  {cls:"cost",value:immigration,title:"Reduced immigration / labor supply",text:"IMF estimates reduced inward migration adds about 0.3% to consumer prices by end-2026. This converts that price-level effect using your annual spending."},
+  {cls:"offset",value:-ctc,title:"Child Tax Credit offset",text:"Counts only the $200-per-child increase from the pre-2025 $2,000 maximum to $2,200. Existing TCJA rates are not relabeled as a new windfall."},
+  {cls:"neutral",value:energy,title:"Forward energy + health sensitivity",text:"Rough annualization of Energy Innovation’s rounded $700B combined consumer-cost estimate over 15 years. Shown separately from the additive-safe current total because model inputs partly incorporate 2026 tariff/inflation pressure."},
+  {cls:"neutral",value:null,title:"Trade & market uncertainty",text:"Accounted for explicitly but not monetized. Fed/IMF evidence shows weaker hiring, investment and precautionary household behavior; a household-dollar add-on would overlap tariff and GDP channels."},
+  {cls:"neutral",value:null,title:"Fuel, grid & renewables",text:"Accounted for inside the energy-policy model: transport rule reversals, wind restrictions, grid capacity effects, hydrogen funding changes and Solar for All cancellation. Near-term geopolitical fuel shocks are not automatically attributed to these domestic policies."}
+ ];
+ $("pricedLedger").innerHTML=cards.map(c=>'<article class="policy-card '+c.cls+'"><div class="value">'+(c.value==null?"Not separately priced":(c.value<0?"− ":"+ ")+WF.money(Math.abs(c.value)))+'</div><h3>'+c.title+'</h3><p>'+c.text+'</p></article>').join("");
+}
+["annualSpend","policyKids","tariffBurden","energyAnnual"].forEach(id=>$(id).addEventListener("input",render));render();
+</script>
+</body></html>
