@@ -23,6 +23,7 @@
 <div class="field-grid" style="margin-top:18px">
 <div class="light-field"><label for="taxIncome">Cash wage income</label><input id="taxIncome" type="number" min="0" step="1000" value="128700"></div>
 <div class="light-field"><label for="taxKids">Qualifying children under 17</label><input id="taxKids" type="number" min="0" max="10" step="1" value="2"></div>
+<div class="light-field"><label for="taxEarners">Wage earners in household</label><input id="taxEarners" type="number" min="1" max="8" step="1" value="2"></div>
 <div class="light-field"><label for="stateLocalRate">State + local all-in rate</label><input id="stateLocalRate" type="number" min="0" max="30" step=".1" value="10.3"></div>
 <div class="light-field"><label for="tariffCost">Annual tariff burden</label><input id="tariffCost" type="number" min="0" step="50" value="1100"></div>
 </div>
@@ -46,7 +47,7 @@
 <div class="section-head"><div><p class="kicker">One ledger</p><h2 class="section-title">Visible taxes plus the ones embedded in wages and prices.</h2></div><p>The stacked bar is proportional to the modeled tax dollars. It is not a 100%-of-income bar, so it does not visually exaggerate any component.</p></div>
 <div class="card card-pad">
 <div class="tax-stack" id="taxStack" aria-label="Tax burden composition"></div>
-<div class="chip-grid" style="margin-bottom:20px"><span class="chip">Federal income</span><span class="chip">Employee payroll</span><span class="chip">Employer payroll</span><span class="chip">Federal corporate incidence</span><span class="chip">Federal excise</span><span class="chip">State & local</span><span class="chip">Tariffs</span></div>
+<div class="chip-grid" style="margin-bottom:20px"><span class="chip">Federal income</span><span class="chip">Employee payroll</span><span class="chip">Employer payroll</span><span class="chip">Federal unemployment</span><span class="chip">Federal corporate incidence</span><span class="chip">Federal excise</span><span class="chip">State & local</span><span class="chip">Tariffs</span></div>
 <div class="grid-3" id="taxCards"></div>
 </div>
 </section>
@@ -55,7 +56,7 @@
 <div class="shell">
 <div class="section-head"><div><p class="kicker">Hidden incidence</p><h2 class="section-title">Who writes the check is not always who bears the cost.</h2></div><p>CBO treats the employer share of payroll tax as borne by workers through lower compensation, allocates corporate income tax partly to labor and capital owners, and allocates excise taxes according to household consumption.</p></div>
 <div class="grid-3">
-<article class="dark-card"><h3>Employer payroll tax</h3><p>The employer remits another 6.2% Social Security tax up to the wage cap plus 1.45% Medicare. CBO’s incidence method treats that as part of workers’ economic tax burden.</p></article>
+<article class="dark-card"><h3>Employer payroll tax</h3><p>The employer remits another 6.2% Social Security tax up to each worker’s wage cap plus 1.45% Medicare. CBO’s incidence method treats employer payroll taxes as part of workers’ economic tax burden. The model also adds net FUTA at 0.6% of the first $7,000 per worker, assuming the standard full state credit.</p></article>
 <article class="dark-card"><h3>Business taxes in prices</h3><p>ITEP’s state/local model includes business sales and excise taxes, corporate income taxes, and other business/property taxes that are not itemized on a household receipt.</p></article>
 <article class="dark-card"><h3>Customs duties</h3><p>Tariffs are taxes collected at the border. The Budget Lab’s current-law estimate puts their ultimate consumer cost at roughly $1,100 per household per year.</p></article>
 </div>
@@ -84,6 +85,7 @@
 <section class="source-section"><div class="shell"><p class="kicker">Data & sources</p><div class="source-list">
 <a class="source-link" href="https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill" target="_blank" rel="noreferrer"><strong>IRS</strong><span>2026 married-filing-jointly brackets and $32,200 standard deduction.</span></a>
 <a class="source-link" href="https://www.ssa.gov/cola/factsheets/2026.html" target="_blank" rel="noreferrer"><strong>SSA</strong><span>2026 employee/employer payroll rates and $184,500 Social Security taxable maximum.</span></a>
+<a class="source-link" href="https://www.irs.gov/publications/p15" target="_blank" rel="noreferrer"><strong>IRS Publication 15</strong><span>2026 FUTA: 6.0% on the first $7,000 per employee, generally 0.6% after the maximum 5.4% state unemployment credit.</span></a>
 <a class="source-link" href="https://www.cbo.gov/publication/62300" target="_blank" rel="noreferrer"><strong>CBO</strong><span>Federal tax-incidence framework: individual income, payroll, corporate income, and excise taxes.</span></a>
 <a class="source-link" href="https://www.cbo.gov/publication/62631" target="_blank" rel="noreferrer"><strong>CBO</strong><span>2022 middle-quintile federal excise effective rate: 0.6%.</span></a>
 <a class="source-link" href="https://itep.org/u-s-average-who-pays-7th-edition/" target="_blank" rel="noreferrer"><strong>ITEP</strong><span>Fourth-quintile U.S.-average state/local burden: 10.3%; senior taxpayers excluded; 99.7% of state/local tax revenue represented.</span></a>
@@ -103,26 +105,30 @@ function federalIncomeTax(gross,kids){
   const ctc=Math.max(0,Math.floor(kids))*2200;
   return Math.max(0,tax-ctc);
 }
-function payroll(gross,employee=true){
-  const ss=Math.min(gross,184500)*.062, medicare=gross*.0145, addl=employee?Math.max(0,gross-250000)*.009:0;
+function payroll(gross,earners,employee=true){
+  const n=Math.max(1,Math.floor(earners||1)),per=gross/n;
+  const ss=Math.min(per,184500)*.062*n,medicare=gross*.0145,addl=employee?Math.max(0,gross-250000)*.009:0;
   return ss+medicare+addl;
 }
+function futa(earners){return Math.max(1,Math.floor(earners||1))*7000*.006}
 function renderTaxes(){
-  const income=Math.max(0,+q("taxIncome").value||0),kids=Math.max(0,+q("taxKids").value||0),sl=Math.max(0,+q("stateLocalRate").value||0)/100,tariffs=Math.max(0,+q("tariffCost").value||0);
+  const income=Math.max(0,+q("taxIncome").value||0),kids=Math.max(0,+q("taxKids").value||0),earners=Math.max(1,+q("taxEarners").value||1),sl=Math.max(0,+q("stateLocalRate").value||0)/100,tariffs=Math.max(0,+q("tariffCost").value||0);
+  const employeeFica=payroll(income,earners,true),employerFica=payroll(income,earners,false),futaTax=futa(earners);
   const parts=[
     {name:"Federal income",v:federalIncomeTax(income,kids),note:"2026 MFJ brackets, standard deduction and modeled CTC",cls:"federal"},
-    {name:"Employee payroll",v:payroll(income,true),note:"Social Security + Medicare withheld from wages",cls:"federal"},
-    {name:"Employer payroll",v:payroll(income,false),note:"Economic incidence treated as lower worker compensation",cls:"hidden"},
+    {name:"Employee payroll",v:employeeFica,note:"Social Security + Medicare withheld from wages; Social Security cap applied per earner",cls:"federal"},
+    {name:"Employer payroll",v:employerFica,note:"Economic incidence treated as lower worker compensation",cls:"hidden"},
+    {name:"Federal unemployment",v:futaTax,note:"Net FUTA at 0.6% of first $7,000 per earner, assuming full state credit",cls:"hidden"},
     {name:"Federal corporate incidence",v:income*.008,note:"0.8% fourth-quintile incidence benchmark",cls:"hidden"},
     {name:"Federal excise",v:income*.006,note:"0.6% middle-quintile CBO benchmark",cls:"hidden"},
     {name:"State & local",v:income*sl,note:(sl*100).toFixed(1)+"% all-in ITEP-style incidence",cls:"state"},
     {name:"Tariffs / customs",v:tariffs,note:"Current-law consumer burden estimate",cls:"tariff"}
   ];
-  const total=parts.reduce((a,b)=>a+b.v,0),comp=income+payroll(income,false),rate=income?total/income*100:0,compRate=comp?total/comp*100:0;
+  const total=parts.reduce((a,b)=>a+b.v,0),comp=income+employerFica+futaTax,rate=income?total/income*100:0,compRate=comp?total/comp*100:0;
   q("totalTaxRate").textContent=rate.toFixed(1)+"%";q("totalTaxDollars").textContent=WF.money(total)+" per year";q("compRate").textContent=compRate.toFixed(1)+"%";q("monthlyTax").textContent=WF.money(total/12);
   q("taxStack").innerHTML=parts.map(p=>'<i class="'+p.cls+'" style="width:'+(total?p.v/total*100:0)+'%" title="'+p.name+' '+WF.money(p.v)+'"></i>').join("");
   q("taxCards").innerHTML=parts.map(p=>'<article class="info-card"><h3>'+p.name+'</h3><span class="big">'+WF.money(p.v)+'</span><p>'+p.note+' · '+(income?p.v/income*100:0).toFixed(1)+'% of cash wages.</p></article>').join("");
 }
-["taxIncome","taxKids","stateLocalRate","tariffCost"].forEach(id=>q(id).addEventListener("input",renderTaxes));renderTaxes();
+["taxIncome","taxKids","taxEarners","stateLocalRate","tariffCost"].forEach(id=>q(id).addEventListener("input",renderTaxes));renderTaxes();
 </script>
 </body></html>
