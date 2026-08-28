@@ -99,7 +99,7 @@ window.WF = (() => {
     }
     const desired=mobile?5:7,step=Math.max(1,Math.ceil((rows.length-1)/(desired-1)));
     rows.forEach((r,i)=>{if(i===0||i===rows.length-1||i%step===0){const t=add("text",{x:x(i),y:H-17,fill:"#737871","font-size":"12","text-anchor":i===0?"start":i===rows.length-1?"end":"middle"});t.textContent=r.label}});
-    series.forEach(s=>{const d=rows.map((r,i)=>(i?"L":"M")+" "+x(i)+" "+y(Number(r[s.key]))).join(" ");add("path",{d,fill:"none",stroke:s.color,"stroke-width":opts.strokeWidth||4,"stroke-linecap":"round","stroke-linejoin":"round"});if(opts.showPoints){rows.forEach((r,i)=>add("circle",{cx:x(i),cy:y(Number(r[s.key])),r:opts.pointRadius||4,fill:s.color,stroke:"#fbfaf6","stroke-width":"2"}))}});
+    series.forEach(s=>{const d=rows.map((r,i)=>(i?"L":"M")+" "+x(i)+" "+y(Number(r[s.key]))).join(" ");add("path",{d,fill:"none",stroke:s.color,"stroke-width":opts.strokeWidth||4,"stroke-linecap":"round","stroke-linejoin":"round","stroke-dasharray":s.dash||""});if(opts.showPoints){rows.forEach((r,i)=>add("circle",{cx:x(i),cy:y(Number(r[s.key])),r:opts.pointRadius||4,fill:s.color,stroke:"#fbfaf6","stroke-width":"2"}))}});
     const focus=add("g",{"aria-hidden":"true"});focus.style.display="none";
     const focusLine=add("line",{y1:p.t,y2:H-p.b,stroke:"#8c928c","stroke-width":"1","stroke-dasharray":"4 4"},focus);
     const circles=series.map(s=>add("circle",{r:"6",fill:s.color,stroke:"#fbfaf6","stroke-width":"3"},focus));
