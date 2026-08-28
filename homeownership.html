@@ -1,13 +1,139 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f0e8"><title>Homeownership Gap — WFCCI</title><meta name="description" content="How long a working family must save for 5%, 10%, and 20% down, and how waiting changes lifetime home cost."><link rel="stylesheet" href="/site.css"></head>
-<body data-page="home">
-<header class="site-header"><div class="nav-main shell"><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><nav class="desktop-nav" aria-label="Primary"><a class="nav-link" data-nav="inflation" href="/">Inflation</a><a class="nav-link" data-nav="home" href="/homeownership.html">Homeownership</a><a class="nav-link" data-nav="tax" href="/tax-burden.html">True tax burden</a><a class="nav-link" data-nav="trump" href="/trump-cost.html">Trump policy cost</a></nav></div><nav class="mobile-tabs" aria-label="Primary mobile"><a class="nav-link" data-nav="inflation" href="/">Inflation</a><a class="nav-link" data-nav="home" href="/homeownership.html">Home</a><a class="nav-link" data-nav="tax" href="/tax-burden.html">Taxes</a><a class="nav-link" data-nav="trump" href="/trump-cost.html">Trump cost</a></nav></header>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f0e8">
+<title>Homeownership — WFCCI</title><meta name="description" content="How long a working family needs to save for 5%, 10%, or 20% down, and what waiting does to the lifetime cash cost of a home.">
+<link rel="stylesheet" href="/styles.css"></head>
+<body>
+<header class="site-header">
+<nav class="nav-main shell" aria-label="Primary"><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><div class="desktop-nav"><a class="nav-link" href="/">Inflation</a><a class="nav-link" aria-current="page" href="/homeownership.html">Homeownership</a><a class="nav-link" href="/taxes.html">True tax burden</a><a class="nav-link" href="/trump-cost.html">Trump burden</a></div></nav>
+<div class="mobile-tabs" aria-label="Site sections"><a class="nav-link" href="/">Inflation</a><a class="nav-link" aria-current="page" href="/homeownership.html">Homeownership</a><a class="nav-link" href="/taxes.html">Taxes</a><a class="nav-link" href="/trump-cost.html">Trump burden</a></div>
+</header>
+
 <main>
-<section class="page-intro shell"><p class="kicker">Homeownership gap · 2026</p><h1 class="display">How long does “just save a down payment” <em>actually take?</em></h1><p class="lead">Start with the national median household income, the current personal saving rate, today’s typical home value and mortgage rate. Then compare 5%, 10% and 20% down, including the price of waiting.</p></section>
-<section class="shell metric-grid"><article class="metric"><span>Typical U.S. home</span><strong id="homeBase">$371,774</strong><p>Zillow · Jul 2026</p></article><article class="metric"><span>Median household income</span><strong id="incomeBase">$80,734</strong><p>ACS 2024 5-year</p></article><article class="metric"><span>Personal saving rate</span><strong>3.0%</strong><p>BEA/FRED · Jul 2026</p></article><article class="metric"><span>30-year mortgage</span><strong>6.66%</strong><p>Freddie Mac · Aug 27, 2026</p></article></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">Localize it</p><h2 class="section-title">Put in a ZIP code.</h2></div><p>The ZIP lookup uses Census ZCTA estimates for median household income and median owner-occupied home value. Those fields remain editable, because local market price and your household income matter more than any national average.</p></div><div class="card card-pad"><form class="inline-form" id="zipForm"><div class="light-field"><label for="zipCode">ZIP code</label><input id="zipCode" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="e.g. 83646"></div><button class="btn primary" type="submit">Load local data</button></form><div class="status" id="zipStatus" aria-live="polite">Uses the U.S. Census 2024 ACS 5-year ZCTA API.</div></div></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">Your assumptions</p><h2 class="section-title">Change anything.</h2></div><p>Defaults use current national figures where a credible current series exists. Home-price appreciation is set to Zillow’s current 1-year U.S. change. Savings yield defaults to zero so the result does not quietly assume investment returns.</p></div><div class="card card-pad"><div class="field-grid"><div class="light-field"><label for="householdIncome">Household income / year</label><input data-home-input id="householdIncome" type="number" inputmode="decimal" value="80734" min="0" step="1000"></div><div class="light-field"><label for="homePrice">Target home price</label><input data-home-input id="homePrice" type="number" inputmode="decimal" value="371774" min="0" step="5000"></div><div class="light-field"><label for="saveRate">Savings rate</label><input data-home-input id="saveRate" type="number" inputmode="decimal" value="3" min="0" max="100" step="0.1"></div><div class="light-field"><label for="mortgageRate">30-year mortgage rate</label><input data-home-input id="mortgageRate" type="number" inputmode="decimal" value="6.66" min="0" max="25" step="0.01"></div><div class="light-field"><label for="appreciationRate">Home-price appreciation / year</label><input data-home-input id="appreciationRate" type="number" inputmode="decimal" value="1" min="0" max="20" step="0.1"></div><div class="light-field"><label for="saveYield">Savings yield / year</label><input data-home-input id="saveYield" type="number" inputmode="decimal" value="0" min="0" max="20" step="0.1"></div><div class="light-field"><label for="closingRate">Closing costs</label><input data-home-input id="closingRate" type="number" inputmode="decimal" value="2.5" min="0" max="10" step="0.1"></div><div class="light-field"><label for="pmiRate">PMI rate</label><input data-home-input id="pmiRate" type="number" inputmode="decimal" value="0.51" min="0" max="5" step="0.01"></div></div><div class="assumption-strip"><div class="assumption"><strong id="annualSavings">—</strong><span>annual savings flow</span></div><div class="assumption"><strong>30 years</strong><span>mortgage term</span></div><div class="assumption"><strong>78% LTV</strong><span>automatic PMI cutoff model</span></div><div class="assumption"><strong>50 years</strong><span>maximum savings horizon shown</span></div></div></div></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">Down-payment race</p><h2 class="section-title">Waiting can cost more than PMI.</h2></div><p>Each scenario lets the target home price move while the family saves. Lifetime cash outlay includes down payment, 30 years of principal and interest, modeled PMI, and closing costs. It excludes property taxes, homeowners insurance and maintenance because those continue regardless of down-payment size.</p></div><div class="scenario-grid"><article class="scenario" data-dp="5"><div class="dp">5%</div><h3>down payment</h3><dl><div><dt>Time to save</dt><dd data-years>—</dd></div><div><dt>Home price then</dt><dd data-price>—</dd></div><div><dt>Initial P&amp;I + PMI</dt><dd data-monthly>—</dd></div><div><dt>PMI lifetime</dt><dd data-pmi>—</dd></div><div><dt>Lifetime cash outlay</dt><dd data-outlay>—</dd></div></dl></article><article class="scenario" data-dp="10"><div class="dp">10%</div><h3>down payment</h3><dl><div><dt>Time to save</dt><dd data-years>—</dd></div><div><dt>Home price then</dt><dd data-price>—</dd></div><div><dt>Initial P&amp;I + PMI</dt><dd data-monthly>—</dd></div><div><dt>PMI lifetime</dt><dd data-pmi>—</dd></div><div><dt>Lifetime cash outlay</dt><dd data-outlay>—</dd></div></dl></article><article class="scenario" data-dp="20"><div class="dp">20%</div><h3>down payment</h3><dl><div><dt>Time to save</dt><dd data-years>—</dd></div><div><dt>Home price then</dt><dd data-price>—</dd></div><div><dt>Initial P&amp;I + PMI</dt><dd data-monthly>—</dd></div><div><dt>PMI lifetime</dt><dd data-pmi>—</dd></div><div><dt>Lifetime cash outlay</dt><dd data-outlay>—</dd></div></dl></article></div><div class="callout" style="margin-top:18px"><strong>Important:</strong> BEA’s personal saving rate is formally a share of disposable personal income, while ACS household income is a gross-income measure. Applying one directly to the other is a transparent simplifying proxy. Override the savings rate or income if you want a household-specific result.</div></section>
-<section class="source-section"><div class="shell"><p class="kicker">Data & sources</p><h2 class="section-title">The model’s inputs are public.</h2><div class="source-list"><a class="source-link" href="https://www.zillow.com/research/"><strong>Zillow</strong><span>July 2026 U.S. typical home value: about $371.8k; 1-year change about 1%.</span></a><a class="source-link" href="https://fred.stlouisfed.org/data/PSAVERT"><strong>BEA / FRED</strong><span>July 2026 personal saving rate: 3.0% of disposable personal income.</span></a><a class="source-link" href="https://www.freddiemac.com/pmms"><strong>Freddie Mac</strong><span>30-year fixed mortgage rate: 6.66% on Aug. 27, 2026.</span></a><a class="source-link" href="https://data.census.gov/table/ACSDT5Y2024.B19013"><strong>Census ACS</strong><span>2024 5-year median household income: $80,734; ZIP lookup uses B19013.</span></a><a class="source-link" href="https://data.census.gov/table/ACSDT5Y2024.B25077"><strong>Census ACS</strong><span>ZIP lookup uses B25077 median owner-occupied home value.</span></a><a class="source-link" href="https://myhome.freddiemac.com/buying/breaking-down-pmi"><strong>Freddie Mac</strong><span>PMI example uses 0.51%; PMI commonly applies below 20% down and can terminate as equity rises.</span></a><a class="source-link" href="https://www.consumerfinance.gov/ask-cfpb/how-do-mortgage-lenders-calculate-monthly-payments-en-1965/"><strong>CFPB</strong><span>Standard fixed-rate mortgage payment mechanics and homeownership cost guidance.</span></a></div></div></section>
+<section class="page-intro shell">
+<p class="kicker">The down-payment treadmill</p>
+<h1 class="display">How long until a working family can <em>actually buy?</em></h1>
+<p class="lead">Saving for a larger down payment lowers financing costs. But waiting while home prices rise can erase that advantage. This model shows both sides of the tradeoff instead of pretending the target price stands still.</p>
+</section>
+
+<section class="section shell" style="padding-top:24px">
+<div class="control-panel">
+<div class="card card-pad">
+<h2 style="margin:0 0 8px;font-size:22px">Use a ZIP code</h2>
+<p class="muted" style="margin:0 0 16px">Loads 2024 ACS 5-year median owner-occupied home value and median household income for the ZIP Code Tabulation Area.</p>
+<div class="inline-form"><div class="light-field"><label for="zip">ZIP code</label><input id="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="83709"></div><button class="btn primary" id="zipBtn" type="button">Load local data</button></div>
+<div class="status" id="zipStatus">National benchmark loaded.</div>
+</div>
+<div class="card card-pad">
+<h2 style="margin:0 0 8px;font-size:22px">National benchmark</h2>
+<div class="assumption-strip" style="grid-template-columns:1fr 1fr">
+<div class="assumption"><strong>$128,700</strong><span>2024 median married-couple family income</span></div>
+<div class="assumption"><strong>$410,700</strong><span>Q2 2026 median new-home sale price</span></div>
+<div class="assumption"><strong>3.0%</strong><span>July 2026 personal saving rate</span></div>
+<div class="assumption"><strong>6.66%</strong><span>30-year mortgage rate, Aug. 27, 2026</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="dark-section">
+<div class="shell">
+<div class="section-head"><div><p class="kicker">Your assumptions</p><h2 class="section-title">Change anything that does not look like your household.</h2></div><p>The defaults use current national source data plus two explicit forecasting assumptions: 3% annual home-price growth and 3.5% yield on down-payment savings.</p></div>
+<div class="dark-card">
+<div class="field-grid">
+<div class="field"><label for="income">Annual household income</label><input id="income" type="number" min="0" step="1000" value="128700"></div>
+<div class="field"><label for="homePrice">Home value today</label><input id="homePrice" type="number" min="0" step="5000" value="410700"></div>
+<div class="field"><label for="saveRate">Savings rate (% of income)</label><input id="saveRate" type="number" min="0" max="100" step=".1" value="3.0"></div>
+<div class="field"><label for="startingSavings">Starting down-payment savings</label><input id="startingSavings" type="number" min="0" step="1000" value="0"></div>
+<div class="field"><label for="mortgageRate">30-year mortgage rate</label><input id="mortgageRate" type="number" min="0" max="20" step=".01" value="6.66"></div>
+<div class="field"><label for="priceGrowth">Annual home-price growth</label><input id="priceGrowth" type="number" min="-10" max="20" step=".1" value="3.0"></div>
+<div class="field"><label for="savingsYield">Savings yield</label><input id="savingsYield" type="number" min="0" max="20" step=".1" value="3.5"></div>
+<div class="field"><label for="pmiRate">PMI rate on original loan</label><input id="pmiRate" type="number" min="0" max="5" step=".05" value=".50"></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section shell">
+<div class="section-head"><div><p class="kicker">5% vs 10% vs 20%</p><h2 class="section-title">The cheapest mortgage is not necessarily the cheapest path to ownership.</h2></div><p>“Lifetime cash cost” means purchase down payment + 30 years of principal and interest + modeled PMI. Property tax, insurance, maintenance, selling costs, and opportunity cost are excluded because they are not financing differences between the three down-payment choices.</p></div>
+<div class="scenario-grid" id="scenarioGrid"></div>
+<div class="assumption-strip" id="summaryStrip"></div>
+</section>
+
+<section class="section shell">
+<div class="section-head"><div><p class="kicker">Time to target</p><h2 class="section-title">How long the family waits.</h2></div><p>Bars begin at zero. The target home price is allowed to grow during the saving period; the savings balance earns the selected yield.</p></div>
+<div class="card card-pad"><div id="saveBars"></div></div>
+</section>
+
+<section class="section shell" id="method">
+<div class="section-head"><div><p class="kicker">Method</p><h2 class="section-title">What the model is doing.</h2></div><p>No frozen home price. No hidden assumptions. Every input that materially changes the answer is exposed above.</p></div>
+<div class="grid-3">
+<article class="info-card"><h3>Saving period</h3><p>Each month, the household adds income × savings rate ÷ 12. Existing savings accrue at the selected yield. The home target appreciates at the selected annual rate until savings equal 5%, 10%, or 20% of that future price.</p></article>
+<article class="info-card"><h3>Mortgage</h3><p>The model uses a fully amortizing 30-year fixed mortgage at the selected rate. It reports monthly principal-and-interest and total interest over 360 payments.</p></article>
+<article class="info-card"><h3>PMI</h3><p>For sub-20% down scenarios, PMI is modeled as the selected annual percentage of the original loan until modeled loan-to-value reaches 80%, using the same home-price-growth assumption.</p></article>
+</div>
+<div class="callout" style="margin-top:16px"><strong>Important:</strong> BEA’s personal saving rate is measured against disposable income, not gross household income. Applying 3.0% to gross income makes the national default somewhat optimistic. The savings-rate field is deliberately editable.</div>
+</section>
+
+<section class="source-section"><div class="shell"><p class="kicker">Data & sources</p><div class="source-list">
+<a class="source-link" href="https://www.census.gov/library/publications/2025/demo/p60-286.html" target="_blank" rel="noreferrer"><strong>U.S. Census</strong><span>2024 median married-couple family income: $128,700.</span></a>
+<a class="source-link" href="https://fred.stlouisfed.org/series/MSPUS" target="_blank" rel="noreferrer"><strong>Census / HUD via FRED</strong><span>Q2 2026 median sales price of new houses: $410,700.</span></a>
+<a class="source-link" href="https://www.bea.gov/data/income-saving/personal-saving-rate" target="_blank" rel="noreferrer"><strong>BEA</strong><span>July 2026 personal saving rate: 3.0% of disposable personal income.</span></a>
+<a class="source-link" href="https://www.freddiemac.com/pmms" target="_blank" rel="noreferrer"><strong>Freddie Mac</strong><span>30-year fixed mortgage average: 6.66% on August 27, 2026.</span></a>
+<a class="source-link" href="https://api.census.gov/data/2024/acs/acs5.html" target="_blank" rel="noreferrer"><strong>ACS 2024 5-year</strong><span>ZIP-localized median household income (B19013) and median owner-occupied home value (B25077). ZIP lookup uses Census ZCTAs, which are not exact USPS delivery ZIP boundaries.</span></a>
+</div></div></section>
 </main>
-<footer class="site-footer"><div class="shell"><div class="footer-grid"><div><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><p class="small">Household economics without pretending the averages fit everyone.</p></div><nav class="footer-nav" aria-label="Footer"><a href="/">Inflation</a><a href="/homeownership.html">Homeownership</a><a href="/tax-burden.html">True tax burden</a><a href="/trump-cost.html">Trump policy cost</a></nav></div><div class="footer-note">Homeownership model updated Aug. 27, 2026. Local ZIP data use 2024 ACS ZCTA estimates and remain editable.</div></div></footer>
-<script src="/app.js" defer></script></body></html>
+
+<footer class="site-footer"><div class="shell"><div class="footer-grid"><div><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><p class="small">Affordability measured as cash a working household actually has to produce.</p></div><nav class="footer-nav" aria-label="Footer"><a href="/">Inflation</a><a href="/homeownership.html">Homeownership</a><a href="/taxes.html">True tax burden</a><a href="/trump-cost.html">Trump burden</a></nav></div><div class="footer-note">National benchmark uses current published data; long-run price growth, savings yield, and PMI are user-editable model assumptions.</div></div></footer>
+
+<script src="/site.js"></script>
+<script>
+const qs=id=>document.getElementById(id);
+function yearsLabel(months){if(months==null)return "Never"; if(months<24)return months+" mo"; return (months/12).toFixed(1)+" yr"}
+function solveSave(dp,price,income,saveRate,start,priceGrowth,savingsYield){
+  let bal=start, annualSave=income*saveRate, max=1200;
+  for(let m=0;m<=max;m++){
+    const futurePrice=price*Math.pow(1+priceGrowth,m/12);
+    if(bal>=futurePrice*dp) return {months:m,savings:bal,price:futurePrice};
+    bal=bal*(1+savingsYield/12)+annualSave/12;
+  }
+  return null;
+}
+function loanBalance(principal,rate,payment,month){let bal=principal,r=rate/12;for(let i=0;i<month;i++)bal=bal*(1+r)-payment;return Math.max(0,bal)}
+function pmiMonths(price,down,rate,pmiRate,appreciation){
+  if(down>=.20)return 0;const loan=price*(1-down),pmt=WF.mortgagePayment(loan,rate,30);
+  for(let m=1;m<=360;m++){const bal=loanBalance(loan,rate,pmt,m),value=price*Math.pow(1+appreciation,m/12);if(bal/value<=.80)return m}
+  return 360;
+}
+function render(){
+  const income=Math.max(0,+qs("income").value||0), price=Math.max(0,+qs("homePrice").value||0), saveRate=Math.max(0,+qs("saveRate").value||0)/100, start=Math.max(0,+qs("startingSavings").value||0), rate=Math.max(0,+qs("mortgageRate").value||0)/100, growth=(+qs("priceGrowth").value||0)/100, sy=Math.max(0,+qs("savingsYield").value||0)/100, pmi=Math.max(0,+qs("pmiRate").value||0)/100;
+  const dps=[.05,.10,.20], results=dps.map(dp=>{
+    const s=solveSave(dp,price,income,saveRate,start,growth,sy);
+    if(!s)return {dp,unreachable:true};
+    const down=s.price*dp, loan=s.price-down, monthly=WF.mortgagePayment(loan,rate,30), totalPI=monthly*360, interest=totalPI-loan, pm=pmiMonths(s.price,dp,rate,pmi,growth), pmiCost=loan*pmi*(pm/12), life=down+totalPI+pmiCost;
+    return {dp,...s,down,loan,monthly,interest,pm,pmiCost,life};
+  });
+  qs("scenarioGrid").innerHTML=results.map(r=>r.unreachable?'<article class="scenario"><h3>'+Math.round(r.dp*100)+'% down</h3><div class="dp">Not reached</div><p class="muted">Under these assumptions the down-payment target outruns savings for 100 years.</p></article>':'<article class="scenario"><h3>'+Math.round(r.dp*100)+'% down</h3><div class="dp">'+yearsLabel(r.months)+'</div><dl><div><dt>Purchase price then</dt><dd>'+WF.money(r.price)+'</dd></div><div><dt>Down payment</dt><dd>'+WF.money(r.down)+'</dd></div><div><dt>Monthly P&I</dt><dd>'+WF.money(r.monthly)+'</dd></div><div><dt>30-year interest</dt><dd>'+WF.money(r.interest)+'</dd></div><div><dt>PMI</dt><dd>'+WF.money(r.pmiCost)+' · '+r.pm+' mo</dd></div><div><dt>Lifetime cash cost</dt><dd>'+WF.money(r.life)+'</dd></div></dl></article>').join("");
+  const valid=results.filter(r=>!r.unreachable), fastest=[...valid].sort((a,b)=>a.months-b.months)[0], cheapest=[...valid].sort((a,b)=>a.life-b.life)[0];
+  qs("summaryStrip").innerHTML='<div class="assumption"><strong>'+WF.money(income*saveRate)+'</strong><span>saved per year at current rate</span></div><div class="assumption"><strong>'+(fastest?yearsLabel(fastest.months):"—")+'</strong><span>fastest modeled path to purchase</span></div><div class="assumption"><strong>'+(cheapest?Math.round(cheapest.dp*100)+"% down":"—")+'</strong><span>lowest modeled lifetime cash cost</span></div><div class="assumption"><strong>'+WF.money(cheapest?.life||0)+'</strong><span>lowest modeled lifetime cash cost</span></div>';
+  const max=Math.max(1,...valid.map(r=>r.months/12));
+  qs("saveBars").innerHTML=results.map(r=>{const yrs=r.unreachable?100:r.months/12,w=Math.min(100,yrs/max*100);return '<div style="display:grid;grid-template-columns:72px 1fr 84px;gap:12px;align-items:center;margin:17px 0"><strong>'+Math.round(r.dp*100)+'% down</strong><div class="bar" style="margin:0;height:14px"><i style="width:'+w+'%"></i></div><strong style="text-align:right;font-variant-numeric:tabular-nums">'+(r.unreachable?'100+ yr':yrs.toFixed(1)+' yr')+'</strong></div>'}).join("");
+}
+document.querySelectorAll("input").forEach(i=>{if(i.id!=="zip")i.addEventListener("input",render)});render();
+
+qs("zipBtn").addEventListener("click",async()=>{
+  const zip=qs("zip").value.trim();
+  if(!/^\d{5}$/.test(zip)){qs("zipStatus").textContent="Enter a five-digit ZIP code.";return}
+  qs("zipBtn").disabled=true;qs("zipStatus").textContent="Loading Census ACS data…";
+  try{
+    const u="https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B19013_001E&for=zip%20code%20tabulation%20area:"+encodeURIComponent(zip);
+    const res=await fetch(u);if(!res.ok)throw new Error("lookup failed");const data=await res.json();
+    if(!data[1])throw new Error("no data");
+    const h=data[0],v=data[1],obj=Object.fromEntries(h.map((k,i)=>[k,v[i]])),home=+obj.B25077_001E,income=+obj.B19013_001E;
+    if(home>0)qs("homePrice").value=Math.round(home);if(income>0)qs("income").value=Math.round(income);
+    qs("zipStatus").textContent=obj.NAME+" · ACS 2024 5-year. Loaded median owner-occupied value "+WF.money(home)+" and median household income "+WF.money(income)+".";
+    render();
+  }catch(e){qs("zipStatus").textContent="Census lookup failed for that ZIP. You can still enter local income and home value manually."}
+  finally{qs("zipBtn").disabled=false}
+});
+</script>
+</body></html>
