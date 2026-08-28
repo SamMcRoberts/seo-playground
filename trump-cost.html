@@ -124,7 +124,7 @@ const tariffPoints=[
 {label:"Feb 20 ’26",date:"2026-02-20",cost:800},
 {label:"Aug 24 ’26",date:"2026-08-24",cost:1100}
 ].map(d=>({...d,t:Date.parse(d.date)}));
-WF.lineChart($("tariffChart"),tariffPoints,[{key:"cost",color:"#9a3d34"}],{
+WF.lineChart($("tariffChart"),tariffPoints,[{key:"cost",color:"#a13d32"}],{
   xValueKey:"t",yMin:0,yMax:5200,showPoints:true,pointRadius:5,yFormatter:v=>"$"+Math.round(v/1000)+"k",
   onFocus:r=>$("tariffReadout").textContent=r.label+" · "+WF.money(r.cost)+"/yr modeled burden"
 });
