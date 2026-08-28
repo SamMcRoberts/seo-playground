@@ -23,7 +23,7 @@
   <div>
     <p class="kicker">Working-Family Cash Cost Index · 2001–2026</p>
     <h1 class="display"><span>Inflation, as a family</span> <em>actually feels it.</em></h1>
-    <p class="lead">CPI measures a broad consumption basket. WFCCI asks a narrower question: how much more cash does a working-age family with children and a mortgage need to maintain roughly the same life?</p>
+    <p class="lead">CPI tracks a broad basket. WFCCI tracks the cash cost of a defined working-family life.</p>
     <div class="hero-actions"><a class="btn primary" href="#calculator">Calculate your inflation</a><a class="btn" href="#method">Methodology</a></div>
   </div>
   <aside class="hero-card" aria-label="2026 index summary">
@@ -40,7 +40,7 @@
 </section>
 
 <section class="section shell" id="data">
-  <div class="section-head"><div><p class="kicker">The divergence</p><h2 class="section-title">A small annual gap compounds into a large lived gap.</h2></div><p>Both series use the same 2001 = 100 index base. No dual axes, no truncated categorical bars, and no smoothed curve that invents data between years.</p></div>
+  <div class="compact-section-head"><div><p class="kicker">The divergence</p><h2 class="section-title">Small annual gaps compound.</h2></div><button class="note-trigger" type="button" aria-label="Chart method note" data-note="Both series use the same 2001 = 100 base. One axis, no truncated categorical bars, and no smoothing that invents data between years.">i</button></div>
   <div class="card chart-card">
     <div class="chart-toolbar"><div class="legend"><span class="legend-item"><i class="dot green"></i>WFCCI</span><span class="legend-item"><i class="dot gold"></i>CPI-U</span></div><div class="chart-note" id="inflationReadout">2026 values</div></div>
     <div class="chart-wrap"><svg id="inflationChart" viewBox="0 0 1000 390" role="img" aria-label="Line chart comparing WFCCI and CPI-U from 2001 through 2026"></svg></div>
@@ -49,16 +49,16 @@
 </section>
 
 <section class="section shell">
-  <div class="section-head"><div><p class="kicker">What drove it</p><h2 class="section-title">The expensive, hard-to-substitute parts of family life rose fastest.</h2></div><p>These are model components, not a claim that every household has the same spending mix.</p></div>
+  <div class="compact-section-head"><div><p class="kicker">What drove it</p><h2 class="section-title">Hard-to-substitute costs rose fastest.</h2></div><button class="note-trigger" type="button" aria-label="Component note" data-note="These are model components, not a claim that every household has the same spending mix.">i</button></div>
   <div class="grid-3" id="categoryCards"></div>
 </section>
 
 <section class="dark-section" id="calculator">
   <div class="shell">
-    <div class="section-head"><div><p class="kicker">Personalized calculator</p><h2 class="section-title">Use your actual budget, not somebody else’s basket.</h2></div><p>Enter current monthly spending. The calculator back-casts each category using its component index and compares the result with CPI-U.</p></div>
+    <div class="compact-section-head"><div><p class="kicker">Personal calculator</p><h2 class="section-title">Use your budget.</h2></div><button class="note-trigger" type="button" aria-label="Calculator note" data-note="Enter current monthly spending. The calculator back-casts each category using its component index and compares the result with CPI-U.">i</button></div>
     <div class="grid-2">
-      <div class="dark-card"><h3>Your 2026 monthly budget</h3><p>Use recurring cash costs.</p><div class="field-grid" id="budgetInputs"></div></div>
-      <div class="dark-card"><h3>Your lived inflation result</h3><p>Increase in the cash needed to support the same modeled footprint since 2001.</p><div class="result-big" id="personalInflation">—</div>
+      <div class="dark-card"><h3>Your 2026 monthly budget</h3><div class="field-grid" id="budgetInputs"></div></div>
+      <div class="dark-card output-first"><div class="compact-head"><h3>Your lived inflation</h3><button class="note-trigger" type="button" aria-label="Result note" data-note="Increase in the cash needed to support the same modeled footprint since 2001.">i</button></div><div class="result-big" id="personalInflation">—</div>
         <div class="result-list"><div class="result-row"><span>2026 monthly budget</span><strong id="currentBudget">—</strong></div><div class="result-row"><span>Equivalent 2001 burden</span><strong id="oldBudget">—</strong></div><div class="result-row"><span>CPI-implied 2001 burden</span><strong id="cpiBudget">—</strong></div><div class="result-row"><span>Gap vs CPI</span><strong id="personalGap">—</strong></div></div>
       </div>
     </div>
@@ -66,7 +66,7 @@
 </section>
 
 <section class="section shell" id="method">
-  <div class="section-head"><div><p class="kicker">Method</p><h2 class="section-title">A cash-cost index for a defined household.</h2></div><p>Target: non-retired working-age household, two parents, one or two children, homeowner with a mortgage, below the top income decile.</p></div>
+  <div class="compact-section-head"><div><p class="kicker">Method</p><h2 class="section-title">A defined household, not everybody.</h2></div><button class="note-trigger" type="button" aria-label="Household definition note" data-note="Target: non-retired working-age household, two parents, one or two children, homeowner with a mortgage, below the top income decile.">i</button></div>
   <div class="grid-3">
     <article class="info-card"><span class="big">38%</span><h3>Housing</h3><p>Mortgage-stock cash burden rather than owners’ equivalent rent.</p></article>
     <article class="info-card"><span class="big">20%</span><h3>Transportation</h3><p>Vehicle finance, fuel, insurance, repair, and replacement pressure.</p></article>
@@ -77,7 +77,7 @@
   </div>
 </section>
 
-<section class="section shell"><div class="section-head"><div><p class="kicker">Year by year</p><h2 class="section-title">2001–2026.</h2></div><p>2026 is provisional. The table is horizontally scrollable on small screens rather than crushing labels.</p></div><div class="card table-wrap"><table><thead><tr><th>Year</th><th>WFCCI</th><th>WFCCI annual</th><th>CPI-U</th><th>CPI-U annual</th><th>Gap</th></tr></thead><tbody id="inflationTable"></tbody></table></div></section>
+<section class="section shell"><div class="compact-section-head"><div><p class="kicker">Year by year</p><h2 class="section-title">2001–2026.</h2></div><button class="note-trigger" type="button" aria-label="Table note" data-note="2026 is provisional. The table scrolls horizontally on small screens rather than compressing labels.">i</button></div><div class="card table-wrap"><table><thead><tr><th>Year</th><th>WFCCI</th><th>WFCCI annual</th><th>CPI-U</th><th>CPI-U annual</th><th>Gap</th></tr></thead><tbody id="inflationTable"></tbody></table></div></section>
 
 <section class="source-section"><div class="shell"><p class="kicker">Data & sources</p><div class="source-list">
 <a class="source-link" href="https://www.bls.gov/cex/" target="_blank" rel="noreferrer"><strong>BLS CE</strong><span>Household expenditure structure and demographic spending patterns.</span></a>
@@ -96,10 +96,10 @@ const rows=[[2001,100,null,100,null],[2002,102.7064,2.7064,101.5810,1.5810],[200
 const chartRows=rows.map(r=>({label:String(r[0]),wf:r[1],cpi:r[3]}));
 WF.lineChart(document.getElementById("inflationChart"),chartRows,[{key:"wf",color:"#387d65"},{key:"cpi",color:"#b68435"}],{yMin:90,yMax:240,onFocus:r=>document.getElementById("inflationReadout").textContent=r.label+" · WFCCI "+r.wf.toFixed(1)+" · CPI-U "+r.cpi.toFixed(1)+" · gap "+(r.wf-r.cpi).toFixed(1)+" pts"});
 const cats={housing:["Housing",196.9,2500],food:["Food",202.0,1200],transportation:["Transportation",239.7,1000],healthcare:["Healthcare",378.5,650],childcare:["Childcare",243.7,1200],utilities:["Utilities",209.1,400]};
-document.getElementById("categoryCards").innerHTML=Object.entries(cats).map(([k,c])=>'<article class="info-card"><h3>'+c[0]+'</h3><span class="big">'+c[1].toFixed(1)+'</span><div class="bar"><i style="width:'+Math.min(100,(c[1]-100)/2.8)+'%"></i></div><p>+'+(c[1]-100).toFixed(1)+'% modeled cash-cost increase since 2001.</p></article>').join("");
-document.getElementById("budgetInputs").innerHTML=Object.entries(cats).map(([k,c])=>'<div class="field"><label for="b-'+k+'">'+c[0]+' / month</label><input id="b-'+k+'" data-cat="'+k+'" type="number" min="0" step="25" value="'+c[2]+'"></div>').join("");
-function updateBudget(){const inputs=[...document.querySelectorAll("#budgetInputs input")],vals=Object.fromEntries(inputs.map(i=>[i.dataset.cat,Math.max(0,+i.value||0)]));const cur=Object.values(vals).reduce((a,b)=>a+b,0);let old=0;for(const [k,v] of Object.entries(vals))old+=v/(cats[k][1]/100);const infl=cur&&old?(cur/old-1)*100:0,cpiOld=cur/1.88594;document.getElementById("personalInflation").textContent=WF.pct(infl);document.getElementById("currentBudget").textContent=WF.money(cur);document.getElementById("oldBudget").textContent=WF.money(old);document.getElementById("cpiBudget").textContent=WF.money(cpiOld);document.getElementById("personalGap").textContent=(infl-88.594).toFixed(1)+" pts"}
-document.querySelectorAll("#budgetInputs input").forEach(i=>i.addEventListener("input",updateBudget));updateBudget();
+document.getElementById("categoryCards").innerHTML=Object.entries(cats).map(([k,c])=>'<article class="info-card compact"><div class="compact-head"><h3>'+c[0]+'</h3>'+WF.note("+"+(c[1]-100).toFixed(1)+"% modeled cash-cost increase since 2001.",c[0]+" details")+'</div><span class="big">'+c[1].toFixed(1)+'</span><div class="bar"><i style="width:'+Math.min(100,(c[1]-100)/2.8)+'%"></i></div></article>').join("");
+document.getElementById("budgetInputs").innerHTML=Object.entries(cats).map(([k,c])=>'<div class="field"><label for="b-'+k+'">'+c[0]+' / month</label><input id="b-'+k+'" data-cat="'+k+'" data-money type="text" inputmode="decimal" value="'+c[2]+'"></div>').join("");
+function updateBudget(){const inputs=[...document.querySelectorAll("#budgetInputs input")],vals=Object.fromEntries(inputs.map(i=>[i.dataset.cat,Math.max(0,WF.value(i))]));const cur=Object.values(vals).reduce((a,b)=>a+b,0);let old=0;for(const [k,v] of Object.entries(vals))old+=v/(cats[k][1]/100);const infl=cur&&old?(cur/old-1)*100:0,cpiOld=cur/1.88594;document.getElementById("personalInflation").textContent=WF.pct(infl);document.getElementById("currentBudget").textContent=WF.money(cur);document.getElementById("oldBudget").textContent=WF.money(old);document.getElementById("cpiBudget").textContent=WF.money(cpiOld);document.getElementById("personalGap").textContent=(infl-88.594).toFixed(1)+" pts"}
+WF.bindMoneyInputs(document);WF.initNotes();document.querySelectorAll("#budgetInputs input").forEach(i=>i.addEventListener("input",updateBudget));updateBudget();
 document.getElementById("inflationTable").innerHTML=rows.map(r=>'<tr><td>'+r[0]+(r[0]===2026?'*':'')+'</td><td>'+r[1].toFixed(1)+'</td><td>'+(r[2]==null?'—':WF.pct(r[2]))+'</td><td>'+r[3].toFixed(1)+'</td><td>'+(r[4]==null?'—':WF.pct(r[4]))+'</td><td>'+(r[1]-r[3]).toFixed(1)+'</td></tr>').join("");
 </script>
 </body></html>
