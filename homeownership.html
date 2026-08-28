@@ -125,12 +125,11 @@ qs("zipBtn").addEventListener("click",async()=>{
   if(!/^\d{5}$/.test(zip)){qs("zipStatus").textContent="Enter a five-digit ZIP code.";return}
   qs("zipBtn").disabled=true;qs("zipStatus").textContent="Loading Census ACS data…";
   try{
-    const u="https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B19013_001E&for=zip%20code%20tabulation%20area:"+encodeURIComponent(zip);
-    const res=await fetch(u);if(!res.ok)throw new Error("lookup failed");const data=await res.json();
-    if(!data[1])throw new Error("no data");
-    const h=data[0],v=data[1],obj=Object.fromEntries(h.map((k,i)=>[k,v[i]])),home=+obj.B25077_001E,income=+obj.B19013_001E;
+    const res=await fetch("/api/census-zip?zip="+encodeURIComponent(zip));
+    const data=await res.json();if(!res.ok)throw new Error(data.error||"lookup failed");
+    const home=Number(data.home),income=Number(data.income);
     if(home>0)qs("homePrice").value=Math.round(home);if(income>0)qs("income").value=Math.round(income);
-    qs("zipStatus").textContent=obj.NAME+" · ACS 2024 5-year. Loaded median owner-occupied value "+WF.money(home)+" and median household income "+WF.money(income)+".";
+    qs("zipStatus").textContent=data.name+" · "+data.vintage+". Loaded median owner-occupied value "+WF.money(home)+" and median household income "+WF.money(income)+".";
     render();
   }catch(e){qs("zipStatus").textContent="Census lookup failed for that ZIP. You can still enter local income and home value manually."}
   finally{qs("zipBtn").disabled=false}
