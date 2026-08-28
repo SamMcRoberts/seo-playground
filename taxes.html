@@ -123,6 +123,7 @@ const nationalITEP={
 };
 const groupLabels=["Lowest 20%","Second 20%","Middle 20%","Fourth 20%","Next 15%","Next 4%","Top 1%"];
 let localITEP=nationalITEP;
+let profileMode=true;
 
 function groupIndex(income,profile=localITEP){
   let i=0;
@@ -131,6 +132,7 @@ function groupIndex(income,profile=localITEP){
 }
 function applyProfile(profile,label){
   localITEP=profile;
+  profileMode=true;
   const income=Math.max(0,WF.value(q("taxIncome")));
   const i=groupIndex(income,profile);
   q("stateLocalRate").value=profile.total[i].toFixed(1);
@@ -142,11 +144,11 @@ function applyProfile(profile,label){
   renderTaxes();
 }
 function syncLocalizedRate(){
-  if(localITEP===nationalITEP)return;
+  if(!profileMode)return;
   const income=Math.max(0,WF.value(q("taxIncome")));
   const i=groupIndex(income,localITEP);
   q("stateLocalRate").value=localITEP.total[i].toFixed(1);
-  const label=(localITEP.city?localITEP.city+", ":"")+(localITEP.state||"Localized");
+  const label=localITEP===nationalITEP?"National ITEP profile":((localITEP.city?localITEP.city+", ":"")+(localITEP.state||"Localized"));
   q("stateLocalStatus").textContent=label+" · "+groupLabels[i]+" · "+localITEP.total[i].toFixed(1)+"%";
   q("stateLocalTitle").textContent=(localITEP.state||"Localized")+" · "+groupLabels[i];
   q("slSales").textContent=(localITEP.sales?.[i]??0).toFixed(1)+"%";
@@ -174,7 +176,14 @@ function renderTaxes(){
   WF.initNotes();
 }
 
-["taxKids","taxEarners","stateLocalRate"].forEach(id=>q(id).addEventListener("input",renderTaxes));
+["taxKids","taxEarners"].forEach(id=>q(id).addEventListener("input",renderTaxes));
+q("stateLocalRate").addEventListener("input",()=>{
+  profileMode=false;
+  q("stateLocalStatus").textContent="Manual state/local rate · "+(+q("stateLocalRate").value||0).toFixed(1)+"%";
+  q("stateLocalTitle").textContent="Manual state/local rate";
+  q("slSales").textContent="—";q("slProperty").textContent="—";q("slIncome").textContent="—";
+  renderTaxes();
+});
 ["taxIncome"].forEach(id=>q(id).addEventListener("input",()=>{syncLocalizedRate();renderTaxes()}));
 q("tariffCost").addEventListener("input",renderTaxes);
 
