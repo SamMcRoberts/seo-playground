@@ -1,15 +1,105 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f0e8"><title>WFCCI — Working-Family Cash Cost Index</title><meta name="description" content="Inflation as experienced by a typical working-age family with children and a mortgage, 2001–2026."><link rel="stylesheet" href="/site.css"></head>
-<body data-page="inflation">
-<header class="site-header"><div class="nav-main shell"><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><nav class="desktop-nav" aria-label="Primary"><a class="nav-link" data-nav="inflation" href="/">Inflation</a><a class="nav-link" data-nav="home" href="/homeownership.html">Homeownership</a><a class="nav-link" data-nav="tax" href="/tax-burden.html">True tax burden</a><a class="nav-link" data-nav="trump" href="/trump-cost.html">Trump policy cost</a></nav></div><nav class="mobile-tabs" aria-label="Primary mobile"><a class="nav-link" data-nav="inflation" href="/">Inflation</a><a class="nav-link" data-nav="home" href="/homeownership.html">Home</a><a class="nav-link" data-nav="tax" href="/tax-burden.html">Taxes</a><a class="nav-link" data-nav="trump" href="/trump-cost.html">Trump cost</a></nav></header>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f0e8">
+<title>WFCCI — Working-Family Cash Cost Index</title><meta name="description" content="Inflation as experienced by a working-age family with children and a mortgage.">
+<link rel="stylesheet" href="/styles.css"></head>
+<body>
+<header class="site-header">
+  <nav class="nav-main shell" aria-label="Primary">
+    <a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a>
+    <div class="desktop-nav">
+      <a class="nav-link" aria-current="page" href="/">Inflation</a>
+      <a class="nav-link" href="/homeownership.html">Homeownership</a>
+      <a class="nav-link" href="/taxes.html">True tax burden</a>
+      <a class="nav-link" href="/trump-cost.html">Trump burden</a>
+    </div>
+  </nav>
+  <div class="mobile-tabs" aria-label="Site sections">
+    <a class="nav-link" aria-current="page" href="/">Inflation</a><a class="nav-link" href="/homeownership.html">Homeownership</a><a class="nav-link" href="/taxes.html">Taxes</a><a class="nav-link" href="/trump-cost.html">Trump burden</a>
+  </div>
+</header>
+
 <main>
-<section class="hero shell"><div><p class="kicker">Working-Family Cash Cost Index · 2001–2026</p><h1 class="display">Inflation, as a family <em>actually feels it.</em></h1><p class="lead">CPI asks how the price of a changing basket of consumption behaves. WFCCI asks how much more cash a normal working family needs to maintain roughly the same life.</p><div class="hero-actions"><a class="btn primary" href="#calculator">Calculate your inflation</a><a class="btn" href="#method">See methodology</a></div></div><aside class="hero-card"><div class="subtle">2001 = 100</div><div class="hero-number">229.4</div><div class="subtle">WFCCI · 2026 provisional</div><div class="hero-card-grid"><div><span class="subtle">CPI-U</span><strong>188.6</strong></div><div><span class="subtle">Gap</span><strong>+40.8 pts</strong></div></div></aside></section>
-<section class="shell metric-grid" aria-label="Index summary"><article class="metric"><span>Working-family rise</span><strong>+129.4%</strong><p>2001 → 2026</p></article><article class="metric"><span>Official CPI-U rise</span><strong>+88.6%</strong><p>2001 → 2026</p></article><article class="metric"><span>WFCCI annualized</span><strong>3.38%</strong><p>25-year CAGR</p></article><article class="metric"><span>CPI-U annualized</span><strong>2.57%</strong><p>25-year CAGR</p></article></section>
-<section class="section shell" id="data"><div class="section-head"><div><p class="kicker">The divergence</p><h2 class="section-title">A small annual gap becomes a large lived gap.</h2></div><p>WFCCI follows the cash burden of major family costs rather than rewarding substitution or quality adjustment. The chart is touch-friendly: drag or tap anywhere on it for the exact year.</p></div><div class="card chart-card"><div class="chart-toolbar"><div class="legend"><span class="legend-item"><i class="dot green"></i>WFCCI</span><span class="legend-item"><i class="dot gold"></i>CPI-U</span></div><div class="chart-note" id="inflationReadout" aria-live="polite">Tap or drag across the chart</div></div><div class="chart-wrap"><svg id="inflationChart" role="img" aria-label="WFCCI and CPI-U index values from 2001 to 2026"></svg></div></div></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">What drove it</p><h2 class="section-title">The expensive parts of family life got expensive fastest.</h2></div><p>Six recurring cost categories drive the model. These are index values with 2001 = 100.</p></div><div class="grid-3" id="categoryCards"></div></section>
-<section class="dark-section" id="calculator"><div class="shell"><div class="section-head"><div><p class="kicker">Personalized calculator</p><h2 class="section-title">What did inflation do to <em>your</em> household?</h2></div><p>Use your actual monthly spending instead of accepting a national basket that may have very little to do with your family.</p></div><div class="grid-2"><div class="dark-card"><h3>Your 2026 monthly budget</h3><p>Enter the categories you actually pay.</p><div class="field-grid" id="budgetInputs"></div></div><div class="dark-card"><h3>Your lived inflation result</h3><p>Equivalent cost of the same household footprint in 2001.</p><div class="result-big" id="personalInflation">—</div><div class="result-list"><div class="result-row"><span>2026 monthly budget</span><strong id="budgetNow">—</strong></div><div class="result-row"><span>Equivalent 2001 burden</span><strong id="budget2001">—</strong></div><div class="result-row"><span>CPI-implied 2001 equivalent</span><strong id="budgetCpi">—</strong></div><div class="result-row"><span>WFCCI vs CPI gap</span><strong id="budgetGap">—</strong></div></div></div></div></div></section>
-<section class="section shell" id="method"><div class="section-head"><div><p class="kicker">Method</p><h2 class="section-title">A cash-cost index for a specific household.</h2></div><p>Target household: two working-age parents, one or two children, homeowner with a mortgage, below the top income decile. It is intentionally a lived-cash-cost measure, not a replacement for CPI.</p></div><div class="grid-3"><article class="info-card"><span class="big">38%</span><h3>Housing</h3><p>Mortgage-stock cash burden rather than owner-equivalent rent.</p></article><article class="info-card"><span class="big">20%</span><h3>Transportation</h3><p>Vehicle finance, fuel, insurance and repair.</p></article><article class="info-card"><span class="big">17%</span><h3>Food</h3><p>Recurring household food cost.</p></article><article class="info-card"><span class="big">10%</span><h3>Healthcare</h3><p>Family premium contribution and medical services.</p></article><article class="info-card"><span class="big">9%</span><h3>Childcare</h3><p>Out-of-pocket care burden for working parents.</p></article><article class="info-card"><span class="big">6%</span><h3>Utilities</h3><p>Electricity and natural gas.</p></article></div></section>
-<section class="section shell"><div class="section-head"><div><p class="kicker">Year by year</p><h2 class="section-title">2001–2026.</h2></div><p>2026 is provisional. Use the CSV if you want the underlying series.</p></div><div class="hero-actions" style="margin:0 0 14px"><button class="btn" id="csvBtn" type="button">Download CSV</button></div><div class="card table-wrap"><table><thead><tr><th>Year</th><th>WFCCI</th><th>WFCCI annual</th><th>CPI-U</th><th>CPI-U annual</th><th>Gap</th></tr></thead><tbody id="inflationTable"></tbody></table></div></section>
-<section class="source-section"><div class="shell"><p class="kicker">Source families</p><h2 class="section-title">Where the inputs come from.</h2><div class="source-list"><a class="source-link" href="https://www.bls.gov/opub/reports/consumer-expenditures/2023/home.htm"><strong>BLS</strong><span>Consumer Expenditure Survey</span></a><a class="source-link" href="https://fred.stlouisfed.org/"><strong>FRED / FHFA</strong><span>Housing, rates and macro series</span></a><a class="source-link" href="https://www.freddiemac.com/pmms"><strong>Freddie Mac</strong><span>Primary Mortgage Market Survey</span></a><a class="source-link" href="https://www.kff.org/health-costs/"><strong>KFF</strong><span>Employer health-benefit costs</span></a><a class="source-link" href="https://www.bls.gov/cpi/"><strong>BLS</strong><span>CPI-U and component price series</span></a></div></div></section>
+<section class="hero shell">
+  <div>
+    <p class="kicker">Working-Family Cash Cost Index · 2001–2026</p>
+    <h1 class="display"><span>Inflation, as a family</span> <em>actually feels it.</em></h1>
+    <p class="lead">CPI measures a broad consumption basket. WFCCI asks a narrower question: how much more cash does a working-age family with children and a mortgage need to maintain roughly the same life?</p>
+    <div class="hero-actions"><a class="btn primary" href="#calculator">Calculate your inflation</a><a class="btn" href="#method">Methodology</a></div>
+  </div>
+  <aside class="hero-card" aria-label="2026 index summary">
+    <div class="subtle">2001 = 100</div><div class="hero-number">229.4</div><div class="subtle">WFCCI · 2026 provisional</div>
+    <div class="hero-card-grid"><div><span class="subtle">CPI-U</span><strong>188.6</strong></div><div><span class="subtle">Gap</span><strong>+40.8 pts</strong></div></div>
+  </aside>
+</section>
+
+<section class="shell metric-grid" aria-label="Key inflation statistics">
+  <article class="metric"><span>Working-family rise</span><strong>+129.4%</strong><p>2001 → 2026</p></article>
+  <article class="metric"><span>Official CPI-U rise</span><strong>+88.6%</strong><p>2001 → 2026</p></article>
+  <article class="metric"><span>WFCCI annualized</span><strong>3.38%</strong><p>25-year CAGR</p></article>
+  <article class="metric"><span>CPI-U annualized</span><strong>2.57%</strong><p>25-year CAGR</p></article>
+</section>
+
+<section class="section shell" id="data">
+  <div class="section-head"><div><p class="kicker">The divergence</p><h2 class="section-title">A small annual gap compounds into a large lived gap.</h2></div><p>Both series use the same 2001 = 100 index base. No dual axes, no truncated categorical bars, and no smoothed curve that invents data between years.</p></div>
+  <div class="card chart-card">
+    <div class="chart-toolbar"><div class="legend"><span class="legend-item"><i class="dot green"></i>WFCCI</span><span class="legend-item"><i class="dot gold"></i>CPI-U</span></div><div class="chart-note" id="inflationReadout">2026 values</div></div>
+    <div class="chart-wrap"><svg id="inflationChart" viewBox="0 0 1000 390" role="img" aria-label="Line chart comparing WFCCI and CPI-U from 2001 through 2026"></svg></div>
+    <div class="chart-scrubber"><input type="range" min="0" max="25" value="25" step="1" data-scrubber-for="inflationChart" aria-label="Select year shown in chart"></div>
+  </div>
+</section>
+
+<section class="section shell">
+  <div class="section-head"><div><p class="kicker">What drove it</p><h2 class="section-title">The expensive, hard-to-substitute parts of family life rose fastest.</h2></div><p>These are model components, not a claim that every household has the same spending mix.</p></div>
+  <div class="grid-3" id="categoryCards"></div>
+</section>
+
+<section class="dark-section" id="calculator">
+  <div class="shell">
+    <div class="section-head"><div><p class="kicker">Personalized calculator</p><h2 class="section-title">Use your actual budget, not somebody else’s basket.</h2></div><p>Enter current monthly spending. The calculator back-casts each category using its component index and compares the result with CPI-U.</p></div>
+    <div class="grid-2">
+      <div class="dark-card"><h3>Your 2026 monthly budget</h3><p>Use recurring cash costs.</p><div class="field-grid" id="budgetInputs"></div></div>
+      <div class="dark-card"><h3>Your lived inflation result</h3><p>Increase in the cash needed to support the same modeled footprint since 2001.</p><div class="result-big" id="personalInflation">—</div>
+        <div class="result-list"><div class="result-row"><span>2026 monthly budget</span><strong id="currentBudget">—</strong></div><div class="result-row"><span>Equivalent 2001 burden</span><strong id="oldBudget">—</strong></div><div class="result-row"><span>CPI-implied 2001 burden</span><strong id="cpiBudget">—</strong></div><div class="result-row"><span>Gap vs CPI</span><strong id="personalGap">—</strong></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section shell" id="method">
+  <div class="section-head"><div><p class="kicker">Method</p><h2 class="section-title">A cash-cost index for a defined household.</h2></div><p>Target: non-retired working-age household, two parents, one or two children, homeowner with a mortgage, below the top income decile.</p></div>
+  <div class="grid-3">
+    <article class="info-card"><span class="big">38%</span><h3>Housing</h3><p>Mortgage-stock cash burden rather than owners’ equivalent rent.</p></article>
+    <article class="info-card"><span class="big">20%</span><h3>Transportation</h3><p>Vehicle finance, fuel, insurance, repair, and replacement pressure.</p></article>
+    <article class="info-card"><span class="big">17%</span><h3>Food</h3><p>Recurring household food cost without substitution-as-relief.</p></article>
+    <article class="info-card"><span class="big">10%</span><h3>Healthcare</h3><p>Family premiums and out-of-pocket medical services.</p></article>
+    <article class="info-card"><span class="big">9%</span><h3>Childcare</h3><p>Out-of-pocket care burden for working parents.</p></article>
+    <article class="info-card"><span class="big">6%</span><h3>Utilities</h3><p>Residential electricity and natural gas.</p></article>
+  </div>
+</section>
+
+<section class="section shell"><div class="section-head"><div><p class="kicker">Year by year</p><h2 class="section-title">2001–2026.</h2></div><p>2026 is provisional. The table is horizontally scrollable on small screens rather than crushing labels.</p></div><div class="card table-wrap"><table><thead><tr><th>Year</th><th>WFCCI</th><th>WFCCI annual</th><th>CPI-U</th><th>CPI-U annual</th><th>Gap</th></tr></thead><tbody id="inflationTable"></tbody></table></div></section>
+
+<section class="source-section"><div class="shell"><p class="kicker">Data & sources</p><div class="source-list">
+<a class="source-link" href="https://www.bls.gov/cex/" target="_blank" rel="noreferrer"><strong>BLS CE</strong><span>Household expenditure structure and demographic spending patterns.</span></a>
+<a class="source-link" href="https://www.bls.gov/cpi/" target="_blank" rel="noreferrer"><strong>BLS CPI</strong><span>Official CPI-U comparison series and category price data.</span></a>
+<a class="source-link" href="https://fred.stlouisfed.org/" target="_blank" rel="noreferrer"><strong>FRED / FHFA</strong><span>Housing, interest-rate, energy, and macroeconomic source series.</span></a>
+<a class="source-link" href="https://www.freddiemac.com/pmms" target="_blank" rel="noreferrer"><strong>Freddie Mac</strong><span>Mortgage-rate history used in housing cash-cost modeling.</span></a>
+<a class="source-link" href="https://www.kff.org/health-costs/" target="_blank" rel="noreferrer"><strong>KFF</strong><span>Employer-sponsored family health-premium costs.</span></a>
+</div></div></section>
 </main>
-<footer class="site-footer"><div class="shell"><div class="footer-grid"><div><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><p class="small">A set of household-cost measures built around what working families actually have to pay.</p></div><nav class="footer-nav" aria-label="Footer"><a href="/">Inflation</a><a href="/homeownership.html">Homeownership</a><a href="/tax-burden.html">True tax burden</a><a href="/trump-cost.html">Trump policy cost</a></nav></div><div class="footer-note">WFCCI · 2026 values are provisional where noted. All models publish their assumptions and source families.</div></div></footer>
-<script src="/app.js" defer></script></body></html>
+
+<footer class="site-footer"><div class="shell"><div class="footer-grid"><div><a class="brand" href="/"><span class="brand-mark">W</span><span>WFCCI</span></a><p class="small">Working-family affordability data without pretending one national headline captures every household.</p></div><nav class="footer-nav" aria-label="Footer"><a href="/">Inflation</a><a href="/homeownership.html">Homeownership</a><a href="/taxes.html">True tax burden</a><a href="/trump-cost.html">Trump burden</a></nav></div><div class="footer-note">WFCCI · 2026 values provisional. Methodology and assumptions are exposed so the model can be challenged rather than treated as an oracle.</div></div></footer>
+
+<script src="/site.js"></script>
+<script>
+const rows=[[2001,100,null,100,null],[2002,102.7064,2.7064,101.5810,1.5810],[2003,106.9947,4.1754,103.8961,2.2790],[2004,111.6290,4.3313,106.6629,2.6630],[2005,117.4873,5.2479,110.2767,3.3880],[2006,123.7104,5.2968,113.8340,3.2258],[2007,128.4957,3.8682,117.0525,2.8274],[2008,132.6393,3.2247,121.5697,3.8591],[2009,131.0131,-1.2261,121.1180,-.3716],[2010,134.7657,2.8643,123.1508,1.6783],[2011,138.4429,2.7286,126.9904,3.1178],[2012,139.9701,1.1031,129.6443,2.0898],[2013,141.9923,1.4448,131.5641,1.4808],[2014,145.2986,2.3285,133.6533,1.5880],[2015,145.3268,.0194,133.8227,.1267],[2016,147.8925,1.7655,135.5167,1.2658],[2017,153.5081,3.7971,138.3964,2.125],[2018,157.4774,2.5858,141.7843,2.448],[2019,161.9114,2.8156,144.3817,1.8319],[2020,162.6463,.4539,146.1321,1.2124],[2021,173.3507,6.5814,153.0209,4.7141],[2022,189.6149,9.3823,165.2739,8.0074],[2023,201.2514,6.1369,172.0497,4.0998],[2024,210.1369,4.4151,177.1316,2.9537],[2025,220.3632,4.8665,181.7617,2.614],[2026,229.4463,4.1219,188.594,3.7589]];
+const chartRows=rows.map(r=>({label:String(r[0]),wf:r[1],cpi:r[3]}));
+WF.lineChart(document.getElementById("inflationChart"),chartRows,[{key:"wf",color:"#387d65"},{key:"cpi",color:"#b68435"}],{yMin:90,yMax:240,onFocus:r=>document.getElementById("inflationReadout").textContent=r.label+" · WFCCI "+r.wf.toFixed(1)+" · CPI-U "+r.cpi.toFixed(1)+" · gap "+(r.wf-r.cpi).toFixed(1)+" pts"});
+const cats={housing:["Housing",196.9,2500],food:["Food",202.0,1200],transportation:["Transportation",239.7,1000],healthcare:["Healthcare",378.5,650],childcare:["Childcare",243.7,1200],utilities:["Utilities",209.1,400]};
+document.getElementById("categoryCards").innerHTML=Object.entries(cats).map(([k,c])=>'<article class="info-card"><h3>'+c[0]+'</h3><span class="big">'+c[1].toFixed(1)+'</span><div class="bar"><i style="width:'+Math.min(100,(c[1]-100)/2.8)+'%"></i></div><p>+'+(c[1]-100).toFixed(1)+'% modeled cash-cost increase since 2001.</p></article>').join("");
+document.getElementById("budgetInputs").innerHTML=Object.entries(cats).map(([k,c])=>'<div class="field"><label for="b-'+k+'">'+c[0]+' / month</label><input id="b-'+k+'" data-cat="'+k+'" type="number" min="0" step="25" value="'+c[2]+'"></div>').join("");
+function updateBudget(){const inputs=[...document.querySelectorAll("#budgetInputs input")],vals=Object.fromEntries(inputs.map(i=>[i.dataset.cat,Math.max(0,+i.value||0)]));const cur=Object.values(vals).reduce((a,b)=>a+b,0);let old=0;for(const [k,v] of Object.entries(vals))old+=v/(cats[k][1]/100);const infl=cur&&old?(cur/old-1)*100:0,cpiOld=cur/1.88594;document.getElementById("personalInflation").textContent=WF.pct(infl);document.getElementById("currentBudget").textContent=WF.money(cur);document.getElementById("oldBudget").textContent=WF.money(old);document.getElementById("cpiBudget").textContent=WF.money(cpiOld);document.getElementById("personalGap").textContent=(infl-88.594).toFixed(1)+" pts"}
+document.querySelectorAll("#budgetInputs input").forEach(i=>i.addEventListener("input",updateBudget));updateBudget();
+document.getElementById("inflationTable").innerHTML=rows.map(r=>'<tr><td>'+r[0]+(r[0]===2026?'*':'')+'</td><td>'+r[1].toFixed(1)+'</td><td>'+(r[2]==null?'—':WF.pct(r[2]))+'</td><td>'+r[3].toFixed(1)+'</td><td>'+(r[4]==null?'—':WF.pct(r[4]))+'</td><td>'+(r[1]-r[3]).toFixed(1)+'</td></tr>').join("");
+</script>
+</body></html>
