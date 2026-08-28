@@ -129,3 +129,13 @@ img,svg{display:block;max-width:100%}
   .tax-local-row{grid-template-columns:1fr}
   .tax-local-row .btn{width:100%}
 }
+
+.budget-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.budget-grid .field label{display:flex;align-items:center;gap:4px;min-height:34px}
+@media(max-width:640px){
+  .calculator-layout .output-first{order:-1}
+  .budget-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .budget-grid .field input{min-width:0}
+  .budget-grid .field label{font-size:12px;line-height:1.25}
+}
+@media(max-width:340px){.budget-grid{grid-template-columns:1fr}}
